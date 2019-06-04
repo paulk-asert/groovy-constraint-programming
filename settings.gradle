@@ -1,17 +1,16 @@
 buildscript {
     repositories {
         gradlePluginPortal()
-        mavenLocal()
     }
     dependencies {
         classpath 'org.kordamp.gradle:settings-gradle-plugin:0.20.0'
     }
 }
 
-rootProject.name = 'groovy-constraint-programming'
+rootProject.name = 'property-based-testing'
 
 apply plugin: 'org.kordamp.gradle.settings'
 
 projects {
-    layout = 'standard'
+    directories = ['docs', 'subprojects']
 }
