@@ -2,7 +2,6 @@
 // JAVA_OPTS=-Djava.library.path=/usr/local/lib
 @Grab('org.choco-solver:choco-solver:4.10.0')
 import org.chocosolver.solver.Model
-import org.chocosolver.solver.variables.IntVar
 import org.chocosolver.solver.variables.RealVar
 
 def model = new Model("Diet problem")
@@ -20,7 +19,8 @@ RealVar[] all = [bread, milk, cheese, potato, fish, yogurt]
 
 def scalarIbex = { coeffs, var ->
     def (a, b, c, d, e, f) = coeffs
-    model.realIbexGenericConstraint("$a*{0}+$b*{1}+$c*{2}+$d*{3}+$e*{4}+$f*{5}={6}", [*all, var] as RealVar[]).post();
+    model.realIbexGenericConstraint("$a*{0}+$b*{1}+$c*{2}+$d*{3}+$e*{4}+$f*{5}={6}",
+            [*all, var] as RealVar[]).post();
 }
 
 def cost = model.realVar("Cost", 0.0, unbounded, precision)
@@ -43,11 +43,11 @@ model.setObjective(Model.MINIMIZE, cost)
 def found = model.solver.findSolution()
 
 def pretty = { var ->
-  def bounds = found.getRealBounds(var)
-  printf "%s: %.6f .. %.6f%n", var.name, *bounds
+    def bounds = found.getRealBounds(var)
+    printf "%s: %.6f .. %.6f%n", var.name, * bounds
 }
-if (found) {
 
+if (found) {
     all.each { pretty(it) }
     [carbs, fat, protein, calories, cost].each { pretty(it) }
 } else {
