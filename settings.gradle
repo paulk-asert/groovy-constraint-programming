@@ -3,11 +3,11 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'org.kordamp.gradle:settings-gradle-plugin:0.20.0'
+        classpath 'org.kordamp.gradle:settings-gradle-plugin:0.21.0'
     }
 }
 
-rootProject.name = 'property-based-testing'
+rootProject.name = 'groovy-constraint-programming'
 
 apply plugin: 'org.kordamp.gradle.settings'
 

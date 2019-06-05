@@ -1,4 +1,4 @@
-@Grab('org.choco-solver:choco-solver:4.10.0')
+//@Grab('org.choco-solver:choco-solver:4.10.0')
 import org.chocosolver.solver.Model
 import org.chocosolver.solver.variables.IntVar
 
@@ -19,7 +19,7 @@ for (int i : limit..1) {
 
     def found = model.solver.findSolution()
     if (found) {
-        println found
+        println "$i: $found"
     } else {
         println "Not possible to order $i nuggets"
         break
