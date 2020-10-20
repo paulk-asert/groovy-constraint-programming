@@ -24,8 +24,8 @@ int[] COEFFS = [
         -10000, -1000, -100, -10, -1]
 model.scalar(ALL, COEFFS, "=", 0).post()
 
-//model.solver.findSolution()
-
+println model.solver.findSolution()
+/*
 model.solver.with {
 //    showDashboard()
 //    showDecisions()
@@ -33,3 +33,4 @@ model.solver.with {
     showSolutions()
     findSolution()
 }
+*/
