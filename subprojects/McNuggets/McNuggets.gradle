@@ -7,6 +7,6 @@ repositories {
 
 dependencies {
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
-    compile 'org.choco-solver:choco-solver:4.10.0'
-    compile 'org.ojalgo:ojalgo:47.2.0'
+    compile 'org.choco-solver:choco-solver:4.10.5'
+    compile 'org.ojalgo:ojalgo:48.3.1'
 }

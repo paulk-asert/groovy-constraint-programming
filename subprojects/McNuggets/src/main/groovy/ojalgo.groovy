@@ -1,4 +1,4 @@
-//@Grab('org.ojalgo:ojalgo:47.2.0')
+//@Grab('org.ojalgo:ojalgo:48.3.1')
 import org.ojalgo.optimisation.ExpressionsBasedModel
 import static org.ojalgo.netio.BasicLogger.debug
 
