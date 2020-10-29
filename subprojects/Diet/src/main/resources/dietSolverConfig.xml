@@ -1,0 +1,33 @@
+<solver>
+    <scanAnnotatedClasses>
+        <packageInclude>opta</packageInclude>
+    </scanAnnotatedClasses>
+    <scoreDirectorFactory>
+        <constraintProviderClass>opta.DietConstraintProvider</constraintProviderClass>
+    </scoreDirectorFactory>
+<!--
+    <constructionHeuristic/>
+    <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+    </constructionHeuristic>
+-->
+<!--
+        <exhaustiveSearch>
+            <exhaustiveSearchType>BRANCH_AND_BOUND</exhaustiveSearchType>
+        </exhaustiveSearch>
+-->
+<!--
+    <localSearch>
+        <unionMoveSelector>
+            <changeMoveSelector/>
+            <swapMoveSelector/>
+            <pillarSwapMoveSelector>
+                <subPillarType>ALL</subPillarType>
+            </pillarSwapMoveSelector>
+        </unionMoveSelector>
+    </localSearch>
+-->
+    <termination>
+        <secondsSpentLimit>20</secondsSpentLimit>
+    </termination>
+</solver>
