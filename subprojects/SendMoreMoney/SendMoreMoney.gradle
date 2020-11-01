@@ -5,6 +5,6 @@ repositories {
 }
 
 dependencies {
-    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
-    compile "org.choco-solver:choco-solver:$chocoVersion"
+    implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+    implementation "org.choco-solver:choco-solver:$chocoVersion"
 }
