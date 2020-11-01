@@ -1,0 +1,33 @@
+plugins {
+    id 'dev.clojurephant.clojure' version '0.6.0-alpha.4'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://repo.clojars.org/'
+    }
+}
+
+clojure {
+    builds {
+        main {
+            aotAll()
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.clojure:clojure:1.10.0'
+    implementation 'org.clojure:core.logic:1.0.0'
+    implementation 'org.clojure:math.combinatorics:0.1.6'
+}
+
+FileUtil.baseNames(file("$projectDir/src/main/clojure"), [], '.clj').each { name ->
+    task "run$name"(type: JavaExec) {
+        group 'Script'
+        description "Run ${name}.clj as a Clojure script"
+        classpath = sourceSets.main.runtimeClasspath
+        main = name
+    }
+}
