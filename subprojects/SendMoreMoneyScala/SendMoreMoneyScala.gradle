@@ -1,0 +1,21 @@
+plugins {
+    id 'scala'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        // warning: https not supported on that repo
+        url = 'http://artifactory.info.ucl.ac.be/artifactory/libs-release'
+    }
+}
+
+mainClassName = "SendMoreMoneyOscar"
+
+dependencies {
+    implementation('org.scala-lang:scala-library:2.12.12') {
+        exclude(group: 'xml-apis', module: 'xml-apis')
+    }
+    implementation 'oscar:oscar-cp_2.12:4.0.0'
+}
