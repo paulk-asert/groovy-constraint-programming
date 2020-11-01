@@ -6,7 +6,7 @@ config {
     info {
         name = 'groovy-constraint-programming'
         vendor = 'paulk-asert'
-        description = 'Examples of Constraint Programming using Groovy'
+        description = 'Examples of Constraint Programming using Groovy and other JVM languages'
         links {
             website      = 'https://github.com/paulk-asert/groovy-constraint-programming'
             issueTracker = 'https://github.com/paulk-asert/groovy-constraint-programming/issues'
