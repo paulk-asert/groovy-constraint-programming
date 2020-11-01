@@ -31,7 +31,7 @@ config {
 
         people {
             person {
-                id    = 'pkasert'
+                id    = 'paulk-asert'
                 name  = 'Paul King'
                 roles = ['developer']
             }

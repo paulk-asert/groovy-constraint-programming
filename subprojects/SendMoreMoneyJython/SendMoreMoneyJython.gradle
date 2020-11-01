@@ -36,12 +36,12 @@ dependencies {
 //    jython ":python-constraint:1.4.0"
 }
 
-FileUtil.baseNames(file("$projectDir/src/main/python"), ['SendMoreMoneyConstraint'], '.py').each { name ->
+FileUtil.baseNames(file("$projectDir/src/main/jython"), ['SendMoreMoneyConstraint'], '.py').each { name ->
     task "run$name"(type: JavaExec) {
         group 'Script'
         description "Run ${name}.py as a Jython script"
         classpath = sourceSets.main.runtimeClasspath
         main = 'org.python.util.jython'
-        args "$projectDir/src/main/python/${name}.py"
+        args "$projectDir/src/main/jython/${name}.py"
     }
 }
