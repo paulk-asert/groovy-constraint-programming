@@ -1,0 +1,25 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.4.10"
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = 'https://dl.bintray.com/agomez/maven'
+    }
+}
+
+mainClassName = "SendMoreMoneyChocoKtxKt"
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10'
+    implementation 'ar.com.agomez:choco-ktx:0.0.8'
+    implementation "org.choco-solver:choco-solver:$chocoVersion"
+}
+
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions.jvmTarget = "1.8"
+}
