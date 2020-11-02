@@ -31,4 +31,6 @@ solve = head [([s,e,n,d], [m,o,r,e], [m,o,n,e,y])
              where digit = [0..9]
 
 main args = do
+    println 'SendMoreMoneyBruteForce:'
+    println '  S, E, N, D +  M, O, R, E =  M, O, N, E, Y'
     println solve
