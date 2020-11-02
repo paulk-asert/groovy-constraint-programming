@@ -20,8 +20,8 @@ plugins {
 config {
     info {
         name = 'groovy-constraint-programming'
-        inceptionYear = '2020'
-        vendor = 'paulk-asert'
+        inceptionYear = '2019'
+        vendor = 'groovy-lang.org'
         description = 'Examples of Constraint Programming using Groovy and other JVM languages'
         links {
             website      = 'https://github.com/paulk-asert/groovy-constraint-programming'
