@@ -57,6 +57,9 @@ def result = search.labeling(store, select, cost)
 println result
 if (result) store.print()
 
+// for a variation with Chocolate cake, see:
+// http://www.hakank.org/jacop/Diet.java
+
 /*
 Solution cost is 1235
 DFS1: DFS([bread = 0, milk = 0, cheese = 5, potato = 19, fish = 5, yogurt = 0], null, null, org.jacop.search.IndomainMin@663411de)
