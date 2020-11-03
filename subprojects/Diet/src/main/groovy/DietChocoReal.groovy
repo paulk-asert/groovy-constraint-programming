@@ -59,7 +59,7 @@ def found = model.solver.findSolution()
 
 def pretty = { var ->
     def bounds = found.getRealBounds(var)
-    printf "%s: %.6f .. %.6f%n", var.name, * bounds
+    printf "%s: %.6f .. %.6f%n", var.name, *bounds
 }
 
 if (found) {
