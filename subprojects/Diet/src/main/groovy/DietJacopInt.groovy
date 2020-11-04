@@ -16,11 +16,8 @@
 
 //@Grab('org.jacop:jacop:4.7.0')
 import org.jacop.constraints.LinearInt
-import org.jacop.core.IntVar
-import org.jacop.core.Store
-import org.jacop.search.DepthFirstSearch
-import org.jacop.search.IndomainMin
-import org.jacop.search.SimpleSelect
+import org.jacop.core.*
+import org.jacop.search.*
 import static org.jacop.core.IntDomain.MaxInt
 
 def store = new Store()
