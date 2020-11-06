@@ -16,7 +16,6 @@
 
 buildscript {
     repositories { jcenter() }
-
     dependencies {
         classpath 'com.github.jruby-gradle:jruby-gradle-plugin:2.1.0-alpha.1'
     }
@@ -28,11 +27,11 @@ import com.github.jrubygradle.JRubyExec
 repositories {
     ruby.gems()
     jcenter()
-//    mavenCentral()
 }
 
 dependencies {
-    gems 'rubygems:csp-solver:0.1.0+'
+    gems "rubygems:colorize:0.7.7+" // support colorize PrintScript test script
+    gems "rubygems:csp-solver:0.1.0"
 }
 
 FileUtil.baseNames(file("$projectDir/src/main/ruby"), [], '.rb').each { name ->
@@ -40,5 +39,6 @@ FileUtil.baseNames(file("$projectDir/src/main/ruby"), [], '.rb').each { name ->
         group 'Script'
         description "Run ${name}.rb as a JRuby script"
         script "${projectDir}/src/main/ruby/${name}.rb"
+//        jrubyArgs "--dev", "-d", "-v"
     }
 }

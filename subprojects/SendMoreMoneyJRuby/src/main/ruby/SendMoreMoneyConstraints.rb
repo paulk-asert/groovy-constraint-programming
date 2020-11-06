@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#require 'rubygems'
 require 'csp-solver'
 
 # Solves the send+more=money problem:
@@ -35,8 +34,8 @@ problem.constraint(letters) { | s, e, n, d, m, o, r, y |
     digits_to_decimal(m, o, n, e, y)
 }
 
-puts "Ruby version: #{RUBY_VERSION}"
-puts "Ruby platform: #{RUBY_PLATFORM}"
+puts "GEM_HOME: #{ENV['GEM_HOME']}"
+puts "Ruby vers: #{RUBY_VERSION}, JRuby vers: #{JRUBY_VERSION}"
 puts 's e n d m o r y'
 problem.solve
 puts letters.values.join(' ')
