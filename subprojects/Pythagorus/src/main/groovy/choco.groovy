@@ -21,8 +21,8 @@ import org.chocosolver.solver.variables.IntVar
 
 // imperative
 for (x in 1..30)
-  for (y in (x+1)..30)
-    for (z in (y+1)..30)
+  for (y in (x+1)..30)      // x < y to remove duplicates
+    for (z in (y+1)..30)    // y < z for efficiency
       if (x*x + y*y == z*z)
         println "($x, $y, $z)"
 
@@ -31,10 +31,10 @@ new Model('Pythagorean-triple').with {
   def x = intVar(1, 30)
   def y = intVar(1, 30)
   def z = intVar(1, 30)
-  x.lt(y).post()
-  y.lt(z).post()
+  x.lt(y).post()      // x < y to remove duplicates
+  y.lt(z).post()      // y < z for efficiency
   x.mul(x).add(y.mul(y)).eq(z.mul(z)).post()
-  while(solver.solve()) {
+  while (solver.solve()) {
     println "[$x.value, $y.value, $z.value]"
   }
 }
