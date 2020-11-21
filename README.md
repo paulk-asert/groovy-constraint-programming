@@ -30,6 +30,8 @@ Lua ([Luaj](https://github.com/luaj/luaj)),
 Prolog ([tuprolog](http://apice.unibo.it/xwiki/bin/view/Tuprolog/)),
 and [Scala](https://www.scala-lang.org/).
 
+![Languages](images/Languages.png)
+
 ---
 
 The [McNuggets subproject](subprojects/McNuggets/)
@@ -65,3 +67,64 @@ Libraries used:
 5. https://www.optaplanner.org/
 6. https://developers.google.com/optimization
 7. https://www.sas.com/en_us/software/or.html (commercial product)
+
+---
+
+## Running the examples
+
+### Running locally
+
+Clone the repo. You can then run scripts from the command-line (various gradle tasks
+have been defined to make this easy) or within your favorite IDE.
+
+Details for cloning and showing available gradle tasks:
+
+<details open>
+<summary>Linux/MacOS</summary>
+
+```
+$ git clone https://github.com/paulk-asert/groovy-constraint-programming.git
+...
+$ ./gradlew tasks
+```
+</details>
+<details>
+<summary>Windows</summary>
+
+Assuming you have git installed:
+
+```
+> git clone https://github.com/paulk-asert/groovy-constraint-programming.git
+...
+> gradlew tasks
+```
+</details>
+
+Make sure you have Java installed prior to running the examples.
+
+Alternatively, run any of the scripts directly in the IDE.
+
+![Gitpod result](images/Intellij.png)
+
+### Running via Gitpod
+
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/paulk-asert/groovy-constraint-programming)
+
+To run via gitpod. Click on the Gitpod button on the github site.
+Once loaded, run one of the available script tasks. To find
+available script tasks you can try something like:
+
+```
+> ./gradlew :McNuggets:tasks --group="Scripts"
+```
+
+You should see something like below:
+![Gitpod tasks](images/Gitpod.png)
+
+And you can run a script with something like:
+```
+> ./gradlew :McNuggets:runChoco
+```
+
+With the following result:
+![Gitpod result](images/GitpodResult.png)
