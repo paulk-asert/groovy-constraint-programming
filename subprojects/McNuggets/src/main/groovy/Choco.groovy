@@ -26,9 +26,9 @@ int[] coeffs = [6, 9, 20]
 
 for (int i : limit..1) {
     def model = new Model("McNuggets challenge")
-    def packs6 = model.intVar("#6-packs", 0, limit.intdiv(6))
-    def packs9 = model.intVar("#9-packs", 0, limit.intdiv(9))
-    def packs20 = model.intVar("#20-packs", 0, limit.intdiv(20))
+    def packs6 = model.intVar("#6-packs", 0, limit/6 as int)
+    def packs9 = model.intVar("#9-packs", 0, limit/9 as int)
+    def packs20 = model.intVar("#20-packs", 0, limit/20 as int)
     IntVar[] all = [packs6, packs9, packs20]
     model.scalar(all, coeffs, "=", i).post()
 
