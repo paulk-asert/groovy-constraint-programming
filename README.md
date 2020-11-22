@@ -136,4 +136,4 @@ With the following result:
 ### Running via Jupyter/BeakerX
 
 Some of the examples have links (look out for ![Binder](https://mybinder.org/badge_logo.svg)) to run as a Jupyter/BeakerX notebook. Output will be similar to below:
-![BearkerX](images/BeakerX.png)
+![BeakerX](images/BeakerX.png)
