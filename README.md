@@ -10,6 +10,10 @@ is an intro example comparing the imperative and constraint-programming styles (
 
 ![Pythagorean](images/Pythagorean.png)
 
+Run via Jupyter/BeakerX:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/paulk-asert/groovy-constraint-programming/master?filepath=subprojects%2FPythagorean%2Fsrc%2Fmain%2Fnotebook%2FPythagorean.ipynb)
+
+
 ---
 
 The [SendMoreMoney subproject](subprojects/SendMoreMoney/)
@@ -128,3 +132,8 @@ And you can run a script with something like:
 
 With the following result:
 ![Gitpod result](images/GitpodResult.png)
+
+### Running via Jupyter/BeakerX
+
+Some of the examples have links (look out for ![Binder](https://mybinder.org/badge_logo.svg)) to run as a Jupyter/BeakerX notebook. Output will be similar to below:
+![BearkerX](images/BeakerX.png)
