@@ -1,14 +1,22 @@
 # Groovy Constraint Programming
 
 This repo contains examples from an Introduction to Constraint Programming talk:
+
 https://speakerdeck.com/paulk/groovy-constraint-programming
+
+You have 4 options to run the examples:
+
+* [running locally](docs/RunningLocal.md) on the command-line or in an IDE
+* [running via gitpod](docs/RunningGitpod.md)
+* [running as a Jupyter/BeakerX](docs/RunningBeakerX.md) notebook
+* [running in the Groovy Console or Groovy Web Console](docs/RunningConsole.md)
 
 ---
 
 The [Pythagorean subproject](subprojects/Pythagorean/)
 is an intro example comparing the imperative and constraint-programming styles (using Choco[1]).
 
-![Pythagorean](images/Pythagorean.png)
+![Pythagorean](docs/images/Pythagorean.png)
 
 Run via Jupyter/BeakerX:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/paulk-asert/groovy-constraint-programming/master?filepath=subprojects%2FPythagorean%2Fsrc%2Fmain%2Fnotebook%2FPythagorean.ipynb)
@@ -20,7 +28,7 @@ The [SendMoreMoney subproject](subprojects/SendMoreMoney/)
 illustrates solving a fairly simple cryptarithmetic puzzle
 using naive brute force, permutations, and constraint-programming with Choco[1].
 
-![SendMoreMoney](images/SendMoreMoney.png)
+![SendMoreMoney](docs/images/SendMoreMoney.png)
 
 Examples for this problem are also provided for
 [Clojure](https://clojure.org/),
@@ -34,7 +42,7 @@ Lua ([Luaj](https://github.com/luaj/luaj)),
 Prolog ([tuprolog](http://apice.unibo.it/xwiki/bin/view/Tuprolog/)),
 and [Scala](https://www.scala-lang.org/).
 
-![Languages](images/Languages.png)
+![Languages](docs/images/Languages.png)
 
 ---
 
@@ -42,7 +50,7 @@ The [McNuggets subproject](subprojects/McNuggets/)
 illustrates solving a fairly simple Frobenius numbers puzzle
 using Choco[1] and Ojalgo[2].
 
-![McNuggets](images/McNuggets.png)
+![McNuggets](docs/images/McNuggets.png)
 
 ---
 
@@ -58,7 +66,7 @@ OrTools[6],
 and SAS/OR[7].
 The slides also show solving this example using Excel and Google sheets.
 
-![Diet](images/Diet.png)
+![Diet](docs/images/Diet.png)
 
 ---
 
@@ -73,67 +81,3 @@ Libraries used:
 7. https://www.sas.com/en_us/software/or.html (commercial product)
 
 ---
-
-## Running the examples
-
-### Running locally
-
-Clone the repo. You can then run scripts from the command-line (various gradle tasks
-have been defined to make this easy) or within your favorite IDE.
-
-Details for cloning and showing available gradle tasks:
-
-<details open>
-<summary>Linux/MacOS</summary>
-
-```
-$ git clone https://github.com/paulk-asert/groovy-constraint-programming.git
-...
-$ ./gradlew tasks
-```
-</details>
-<details>
-<summary>Windows</summary>
-
-Assuming you have git installed:
-
-```
-> git clone https://github.com/paulk-asert/groovy-constraint-programming.git
-...
-> gradlew tasks
-```
-</details>
-
-Make sure you have Java installed prior to running the examples.
-
-Alternatively, run any of the scripts directly in the IDE.
-
-![Gitpod result](images/Intellij.png)
-
-### Running via Gitpod
-
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/paulk-asert/groovy-constraint-programming)
-
-To run via gitpod. Click on the Gitpod button on the github site.
-Once loaded, run one of the available script tasks. To find
-available script tasks you can try something like:
-
-```
-> ./gradlew :McNuggets:tasks --group="Scripts"
-```
-
-You should see something like below:
-![Gitpod tasks](images/Gitpod.png)
-
-And you can run a script with something like:
-```
-> ./gradlew :McNuggets:runChoco
-```
-
-With the following result:
-![Gitpod result](images/GitpodResult.png)
-
-### Running via Jupyter/BeakerX
-
-Some of the examples have links (look out for ![Binder](https://mybinder.org/badge_logo.svg)) to run as a Jupyter/BeakerX notebook. Output will be similar to below:
-![BeakerX](images/BeakerX.png)
