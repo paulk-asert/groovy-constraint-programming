@@ -61,12 +61,12 @@ Then pick one of those tasks to run, e.g. to run the Groovy permutations example
 
 For the other languages, choose the appropriate subproject and arguments:
 ```
-:SendMoreMoneyClojure:tasks --group="Script"`
-:SendMoreMoneyFrege:tasks --group="Script"`
-:SendMoreMoneyJRuby:tasks --group="Script"`
-:SendMoreMoneyJython:tasks --group="Script"`
+:SendMoreMoneyClojure:tasks --group="Script"
+:SendMoreMoneyFrege:tasks --group="Script"
+:SendMoreMoneyJRuby:tasks --group="Script"
+:SendMoreMoneyJython:tasks --group="Script"
 :SendMoreMoneyKotlin:run
-:SendMoreMoneyLuaj:tasks --group="Script"`
+:SendMoreMoneyLuaj:tasks --group="Script"
 :SendMoreMoneyProlog:run
 :SendMoreMoneyScala:run
 ```
