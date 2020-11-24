@@ -47,6 +47,32 @@ and [Scala](https://www.scala-lang.org/).
 
 ![Languages](docs/images/Languages.png)
 
+Command-line arguments for Gradle to run the Java solution:
+`:SendMoreMoney:run`
+
+Command-line arguments for Gradle to see the task names for the JavaScript and various Groovy solutions:
+```
+:SendMoreMoney:tasks --group="Script"
+```
+Then pick one of those tasks to run, e.g. to run the Groovy permutations example:
+```
+:SendMoreMoney:runSendMoreMoneyPermutations
+```
+
+For the other languages, choose the appropriate subproject and arguments:
+```
+:SendMoreMoneyClojure:tasks --group="Script"`
+:SendMoreMoneyFrege:tasks --group="Script"`
+:SendMoreMoneyJRuby:tasks --group="Script"`
+:SendMoreMoneyJython:tasks --group="Script"`
+:SendMoreMoneyKotlin:run
+:SendMoreMoneyLuaj:tasks --group="Script"`
+:SendMoreMoneyProlog:run
+:SendMoreMoneyScala:run
+```
+Typically `run` is used if there is only one example, otherwise you will have to
+pick one of the run tasks returned by the `tasks` command.
+
 ---
 
 The [McNuggets subproject](subprojects/McNuggets/)
@@ -54,6 +80,15 @@ illustrates solving a fairly simple Frobenius numbers puzzle
 using Choco[1] and Ojalgo[2].
 
 ![McNuggets](docs/images/McNuggets.png)
+
+Command-line arguments for Gradle to see the task names for the available solutions:
+```
+:McNuggets:tasks --group="Script"
+```
+Then pick one of those tasks to run, e.g. to run the Ojalgo solution:
+```
+:McNuggets:runOjalgo
+```
 
 ---
 
@@ -70,6 +105,15 @@ and SAS/OR[7].
 The slides also show solving this example using Excel and Google sheets.
 
 ![Diet](docs/images/Diet.png)
+
+Command-line arguments for Gradle to see the task names for the available solutions:
+```
+:Diet:tasks --group="Script"
+```
+Then pick one of those tasks to run, e.g. to run the Apache Commons Math solution:
+```
+:Diet:runDietCommonsMath
+```
 
 ---
 
