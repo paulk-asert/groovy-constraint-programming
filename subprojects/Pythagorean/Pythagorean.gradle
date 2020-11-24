@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 apply plugin: 'groovy'
+apply plugin: 'application'
 
 repositories {
     mavenCentral()
 }
+
+mainClassName = "Choco"
 
 dependencies {
     implementation "org.codehaus.groovy:groovy-all:$groovyVersion"

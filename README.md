@@ -14,13 +14,16 @@ You have 4 options to run the examples:
 ---
 
 The [Pythagorean subproject](subprojects/Pythagorean/)
-is an intro example comparing the imperative and constraint-programming styles (using Choco[1]).
+is an introductory example comparing an imperative style solution (using a brute-force approach), and
+a constraint-programming solution (using Choco[1]).
 
 ![Pythagorean](docs/images/Pythagorean.png)
 
-Run via Jupyter/BeakerX:
+Run Choco solution via Jupyter/BeakerX:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/paulk-asert/groovy-constraint-programming/master?filepath=subprojects%2FPythagorean%2Fsrc%2Fmain%2Fnotebook%2FPythagorean.ipynb)
 
+Command-line arguments for Gradle to run the script:
+`:Pythagorean:run`
 
 ---
 
