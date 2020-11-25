@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.optaplanner:optaplanner-core:7.45.0.Final')
+//@Grab('org.optaplanner:optaplanner-core:7.46.0.Final')
 import opta.DietSolution
 import opta.Food
 import org.optaplanner.core.api.solver.SolverFactory

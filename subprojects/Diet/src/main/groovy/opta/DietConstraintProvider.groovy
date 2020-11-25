@@ -39,16 +39,22 @@ class DietConstraintProvider implements ConstraintProvider {
         }
     }
 
+    private int amountOf(Food f, String name) {
+        (f."$name" * f.amount).toInteger()
+    }
+
     private Constraint minField(ConstraintFactory factory, String fieldName, double minAmount) {
+        ToIntFunction<Food> amount = f -> amountOf(f, fieldName)
         factory.from(Food).filter(f -> f.amount > 0)
-                .groupBy(sum((ToIntFunction)(f -> (f."$fieldName" * f.amount).toInteger())))
+                .groupBy(sum(amount))
                 .filter(fs -> fs < minAmount * 100)
                 .penalize("Min $fieldName", ONE_HARD)
     }
 
     private Constraint maxField(ConstraintFactory factory, String fieldName, double maxAmount) {
+        ToIntFunction<Food> amount = f -> amountOf(f, fieldName)
         factory.from(Food).filter(f -> f.amount > 0)
-                .groupBy(sum((ToIntFunction)(f -> (f."$fieldName" * f.amount).toInteger())))
+                .groupBy(sum(amount))
                 .filter(fs -> fs > maxAmount * 100)
                 .penalize("Max $fieldName", ONE_HARD)
     }
