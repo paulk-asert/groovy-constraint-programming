@@ -39,11 +39,11 @@ class DietConstraintProvider implements ConstraintProvider {
         }
     }
 
-    private int amountOf(Food f, String name) {
+    private static int amountOf(Food f, String name) {
         (f."$name" * f.amount).toInteger()
     }
 
-    private Constraint minField(ConstraintFactory factory, String fieldName, double minAmount) {
+    private static Constraint minField(ConstraintFactory factory, String fieldName, double minAmount) {
         ToIntFunction<Food> amount = f -> amountOf(f, fieldName)
         factory.from(Food).filter(f -> f.amount > 0)
                 .groupBy(sum(amount))
@@ -51,7 +51,7 @@ class DietConstraintProvider implements ConstraintProvider {
                 .penalize("Min $fieldName", ONE_HARD)
     }
 
-    private Constraint maxField(ConstraintFactory factory, String fieldName, double maxAmount) {
+    private static Constraint maxField(ConstraintFactory factory, String fieldName, double maxAmount) {
         ToIntFunction<Food> amount = f -> amountOf(f, fieldName)
         factory.from(Food).filter(f -> f.amount > 0)
                 .groupBy(sum(amount))
@@ -59,13 +59,13 @@ class DietConstraintProvider implements ConstraintProvider {
                 .penalize("Max $fieldName", ONE_HARD)
     }
 
-    private Constraint minFood(ConstraintFactory factory, String foodName, double minAmount) {
+    private static Constraint minFood(ConstraintFactory factory, String foodName, double minAmount) {
         factory.from(Food)
                 .filter(f -> f.name == foodName && f.amount < minAmount)
                 .penalize("Min $foodName", ONE_HARD)
     }
 
-    private Constraint maxFood(ConstraintFactory factory, String foodName, double maxAmount) {
+    private static Constraint maxFood(ConstraintFactory factory, String foodName, double maxAmount) {
         factory.from(Food)
                 .filter(f -> f.name == foodName && f.amount > maxAmount)
                 .penalize("Max $foodName", ONE_HARD)
