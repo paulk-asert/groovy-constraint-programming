@@ -27,54 +27,14 @@ Command-line arguments for Gradle to run the script:
 
 ---
 
-The [SendMoreMoney subproject](subprojects/SendMoreMoney/)
-illustrates solving a fairly simple cryptarithmetic puzzle
-using naive brute force, permutations, and constraint-programming with Choco[1].
+## Cryptarithmetic puzzles
 
-![SendMoreMoney](docs/images/SendMoreMoney.png)
+This example solves a classic cryptarithmetic puzzle using constraint programming.
+The Groovy solution is contrasted with brute-force approaches and solutions in other JVM languages.
 
-Examples for this problem are also provided for
-[Clojure](https://clojure.org/),
-Haskell ([Frege](https://github.com/Frege/frege)),
-[Java](https://www.java.com/),
-JavaScript ([Nashorn](https://docs.oracle.com/javase/10/nashorn/)),
-Ruby ([JRuby](https://www.jruby.org/)), 
-Python ([Jython](https://www.jython.org/)),
-[Kotlin](https://kotlinlang.org/),
-Lua ([Luaj](https://github.com/luaj/luaj)),
-Prolog ([tuprolog](http://apice.unibo.it/xwiki/bin/view/Tuprolog/)),
-and [Scala](https://www.scala-lang.org/).
+![Constraint programming](docs/images/cp_screenshot.png)
 
-![Languages](docs/images/Languages.png)
-
-Command-line arguments for Gradle to run the Java solution:
-`:SendMoreMoney:run`
-
-Command-line arguments for Gradle to see the task names for the JavaScript and various Groovy solutions:
-```
-:SendMoreMoney:tasks --group="Script"
-```
-Then pick one of those tasks to run, e.g. to run the Groovy permutations example:
-```
-:SendMoreMoney:runSendMoreMoneyPermutations
-```
-
-For the other languages, choose the appropriate subproject and arguments:
-```
-:SendMoreMoneyClojure:tasks --group="Script"
-:SendMoreMoneyFrege:tasks --group="Script"
-:SendMoreMoneyJRuby:tasks --group="Script"
-:SendMoreMoneyJython:tasks --group="Script"
-:SendMoreMoneyKotlin:run
-:SendMoreMoneyLuaj:tasks --group="Script"
-:SendMoreMoneyProlog:run
-:SendMoreMoneyScala:run
-```
-Typically `run` is used if there is only one example, otherwise you will have to
-pick one of the run tasks returned by the `tasks` command.
-
-Alternatively, you can run the examples online using a Jupyter/Beakerx notebook:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/paulk-asert/groovy-constraint-programming/master?filepath=subprojects%2FSendMoreMoney%2Fsrc%2Fmain%2Fnotebook%2FSendMoreMoney.ipynb)
+See the [SendMoreMoney subproject](subprojects/SendMoreMoney/) for all the details.
 
 ---
 
