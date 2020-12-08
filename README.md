@@ -73,6 +73,9 @@ For the other languages, choose the appropriate subproject and arguments:
 Typically `run` is used if there is only one example, otherwise you will have to
 pick one of the run tasks returned by the `tasks` command.
 
+Alternatively, you can run the examples online using a Jupyter/Beakerx notebook:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/paulk-asert/groovy-constraint-programming/master?filepath=subprojects%2FSendMoreMoney%2Fsrc%2Fmain%2Fnotebook%2FSendMoreMoney.ipynb)
+
 ---
 
 The [McNuggets subproject](subprojects/McNuggets/)
