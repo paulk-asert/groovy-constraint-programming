@@ -53,6 +53,22 @@ The Groovy solution is contrasted with brute-force approaches and solutions in o
 
 See the [SendMoreMoney subproject](subprojects/SendMoreMoney/) for all the details.
 
+Constraint-programming libraries covered:
+[Choco][]
+
+Programming languages covered:
+[Clojure][],
+[Groovy][],
+[Frege][],
+[Java][],
+[Nashorn][],
+[JRuby][],
+[Jython][],
+[Kotlin][],
+[Luaj][],
+[Scala][],
+[tuprolog][].
+
 ---
 
 ## Diet optimization
@@ -64,24 +80,46 @@ Numerous technologies and approaches are used to solve the problem.
 
 See the [Diet subproject](subprojects/Diet/) for all the details.
 
-Technologies illustrated: Apache Commons Math[3],
-Choco[1] (with and without ibex integration),
-Jacop[4] (using scalar-product/weighted-sum and knapsack algorithms),
-Ojalgo[2],
-OptaPlanner[5],
-OrTools[6],
-SAS/OR[7].
+Technologies illustrated:
+[Apache Commons Math][],
+[Choco][] (with and without ibex integration),
+[JaCoP][] (using scalar-product/weighted-sum and knapsack algorithms),
+[Ojalgo][],
+[OptaPlanner][],
+[OrTools][],
+[SAS/OR][].
 
 ---
 
+## Technology Summary
+
 Libraries used:
 
-1. https://choco-solver.org/
-2. https://www.ojalgo.org/
-3. https://commons.apache.org/proper/commons-math/
-4. https://github.com/radsz/jacop
-5. https://www.optaplanner.org/
-6. https://developers.google.com/optimization
-7. https://www.sas.com/en_us/software/or.html (commercial product)
+[Choco][],
+[Apache Commons Math][],
+[JaCoP][],
+[OptaPlanner][],
+[OrTools][],
+[SAS/OR][] (commercial product).
+
+[Apache Commons Math]: https://commons.apache.org/proper/commons-math/
+[Choco]: http://www.choco-solver.org/
+[Ojalgo]: https://www.ojalgo.org/
+[JaCoP]: https://github.com/radsz/jacop
+[OptaPlanner]: https://www.optaplanner.org/
+[OrTools]: https://developers.google.com/optimization "Google OR Tools"
+[SAS/OR]: https://www.sas.com/en_us/software/or.html
+
+[Clojure]: https://clojure.org/
+[Groovy]: https://groovy-lang.org/
+[Frege]: https://github.com/Frege/frege "JVM Haskell"
+[Java]: https://www.java.com/
+[Nashorn]: https://docs.oracle.com/javase/10/nashorn/ "JavaScript for JVM up to JDK"
+[JRuby]: https://www.jruby.org/ "Ruby for the JVM"
+[Jython]: https://www.jython.org/ "Python for the JVM"
+[Kotlin]: https://kotlinlang.org/
+[Luaj]: https://github.com/luaj/luaj "LUA for the JVM"
+[Scala]: https://www.scala-lang.org/
+[tuprolog]: http://apice.unibo.it/xwiki/bin/view/Tuprolog/ "A prolog for the JVM"
 
 ---
