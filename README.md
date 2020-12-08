@@ -27,17 +27,6 @@ Command-line arguments for Gradle to run the script:
 
 ---
 
-## Cryptarithmetic puzzles
-
-This example solves a classic cryptarithmetic puzzle using constraint programming.
-The Groovy solution is contrasted with brute-force approaches and solutions in other JVM languages.
-
-![Constraint programming](docs/images/cp_screenshot.png)
-
-See the [SendMoreMoney subproject](subprojects/SendMoreMoney/) for all the details.
-
----
-
 The [McNuggets subproject](subprojects/McNuggets/)
 illustrates solving a fairly simple Frobenius numbers puzzle
 using Choco[1] and Ojalgo[2].
@@ -55,28 +44,33 @@ Then pick one of those tasks to run, e.g. to run the Ojalgo solution:
 
 ---
 
-The [Diet subproject](subprojects/Diet/)
-illustrates solving an optimization/linear programming problem
-using
-Apache Commons Math[3],
+## Cryptarithmetic puzzles
+
+This example solves a classic cryptarithmetic puzzle using constraint programming.
+The Groovy solution is contrasted with brute-force approaches and solutions in other JVM languages.
+
+![Constraint programming](docs/images/cp_screenshot.png)
+
+See the [SendMoreMoney subproject](subprojects/SendMoreMoney/) for all the details.
+
+---
+
+## Diet optimization
+
+This example solves an optimization/linear programming problem.
+Numerous technologies and approaches are used to solve the problem.
+
+![Linear programming](docs/images/lp_screenshot.png)
+
+See the [Diet subproject](subprojects/Diet/) for all the details.
+
+Technologies illustrated: Apache Commons Math[3],
 Choco[1] (with and without ibex integration),
 Jacop[4] (using scalar-product/weighted-sum and knapsack algorithms),
 Ojalgo[2],
 OptaPlanner[5],
 OrTools[6],
-and SAS/OR[7].
-The slides also show solving this example using Excel and Google sheets.
-
-![Diet](docs/images/Diet.png)
-
-Command-line arguments for Gradle to see the task names for the available solutions:
-```
-:Diet:tasks --group="Script"
-```
-Then pick one of those tasks to run, e.g. to run the Apache Commons Math solution:
-```
-:Diet:runDietCommonsMath
-```
+SAS/OR[7].
 
 ---
 
