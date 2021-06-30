@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 apply plugin: 'groovy'
-def os = System.getProperty("os.name").toLowerCase()
 
 repositories {
     mavenCentral()
@@ -28,20 +27,7 @@ dependencies {
     implementation 'org.apache.commons:commons-math3:3.6.1'
     implementation 'org.optaplanner:optaplanner-core:7.46.0.Final'
     implementation 'ch.qos.logback:logback-classic:1.2.3' // optional for optaplanner debugging
-    // better publication of platform specific jars is expected from Google soon
-    // until then, use different versions based on ad-hoc publication from 3rd parties
-    if (os.contains('linux')) {
-        implementation 'com.panavis.open-source:google-ortools-java:7.8.7961'
-        implementation 'com.panavis.open-source:ortools-linux-x86-64:7.8.7959'
-    } else if (os.contains('windows')) {
-        // jars from ortools install are copied to lib directory
-        implementation files('lib/ortools-java-8.0.8283.jar')
-        implementation files('lib/ortools-win32-x86-64-8.0.8283.jar')
-        implementation 'com.panavis.open-source:google-ortools-java:7.8.7961' // get other dependencies
-    } else if (os.contains('macosx')) {
-        implementation 'io.github.ejif.ortools:ortools:0.0.2'
-        implementation 'io.github.ejif.ortools:ortools-macosx:0.0.2'
-    }
+    implementation "com.google.ortools:ortools-java:$ortoolsVersion"
 }
 
 FileUtil.baseNames(file("$projectDir/src/main/groovy")).each { name ->
