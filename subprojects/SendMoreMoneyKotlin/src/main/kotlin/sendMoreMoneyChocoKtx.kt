@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ // This example uses a nice extension to Kotlin for Choco:
+ // https://github.com/ideaplugins/choco-ktx
+ // This extension may not be in widespread use and since the
+ // bintray shutdown, isn't currently in a public repo.
 import ar.com.agomez.choco.*
 
 fun main(args: Array<String>) {
