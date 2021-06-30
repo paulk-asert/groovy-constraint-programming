@@ -23,6 +23,7 @@ repositories {
     maven {
         // warning: https not supported on that repo
         url = 'http://artifactory.info.ucl.ac.be/artifactory/libs-release'
+        allowInsecureProtocol = true
     }
 }
 
