@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// needs manual install & configuration on macos and windows
 import com.google.ortools.Loader
 import com.google.ortools.constraintsolver.IntVar
 import com.google.ortools.constraintsolver.Solver

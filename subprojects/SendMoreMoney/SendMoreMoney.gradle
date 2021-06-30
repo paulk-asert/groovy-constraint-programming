@@ -16,7 +16,7 @@
 apply plugin: 'groovy'
 apply plugin: 'application'
 
-mainClassName = "SendMoreMoneyChocoJava"
+mainClassName = 'SendMoreMoneyChocoJava'
 
 repositories {
     mavenCentral()
@@ -25,6 +25,7 @@ repositories {
 dependencies {
     implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
+    implementation "com.google.ortools:ortools-java:$ortoolsVersion"
 }
 
 FileUtil.baseNames(file("$projectDir/src/main/groovy")).each { name ->
