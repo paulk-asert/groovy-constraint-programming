@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 plugins {
-    id 'dev.clojurephant.clojure' version '0.6.0-alpha.4'
+    id 'dev.clojurephant.clojure' version '0.6.0'
 }
 
 repositories {
