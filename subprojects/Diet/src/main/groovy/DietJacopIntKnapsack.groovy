@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-//@Grab('org.jacop:jacop:4.7.0')
+//@Grab('org.jacop:jacop:4.8.0')
 import org.jacop.constraints.LinearInt
 import org.jacop.constraints.knapsack.Knapsack
 import org.jacop.core.IntVar

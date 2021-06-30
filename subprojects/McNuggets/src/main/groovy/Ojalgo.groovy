@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.ojalgo:ojalgo:48.3.1')
+//@Grab('org.ojalgo:ojalgo:48.4.2')
 import org.ojalgo.optimisation.ExpressionsBasedModel
 import static org.ojalgo.netio.BasicLogger.debug
 
