@@ -15,9 +15,14 @@
  */
 
 buildscript {
-    repositories { jcenter() }
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
     dependencies {
-        classpath 'com.github.jruby-gradle:jruby-gradle-plugin:2.1.0-alpha.1'
+//        classpath 'com.github.jruby-gradle:jruby-gradle-plugin:2.1.0-alpha.2'
+        classpath 'com.github.jruby-gradle:jruby-gradle-plugin:2.0.1'
     }
 }
 apply plugin: 'com.github.jruby-gradle.base'
@@ -25,20 +30,23 @@ apply plugin: 'com.github.jruby-gradle.base'
 import com.github.jrubygradle.JRubyExec
 
 repositories {
+    maven {
+        url 'https://plugins.gradle.org/m2/'
+    }
     ruby.gems()
-    jcenter()
 }
 
 dependencies {
-    gems "rubygems:colorize:0.7.7+" // support colorize PrintScript test script
-    gems "rubygems:csp-solver:0.1.0"
+    gems 'rubygems:colorize:0.7.7+' // support colorize PrintScript test script
+    gems 'rubygems:csp-solver:0.1.0'
 }
 
 FileUtil.baseNames(file("$projectDir/src/main/ruby"), [], '.rb').each { name ->
     task "run$name"(type: JRubyExec) {
         group 'Script'
+        jruby.jrubyVersion '9.2.19.0'
         description "Run ${name}.rb as a JRuby script"
         script "${projectDir}/src/main/ruby/${name}.rb"
-//        jrubyArgs "--dev", "-d", "-v"
+        jrubyArgs "-d", "-v"
     }
 }
