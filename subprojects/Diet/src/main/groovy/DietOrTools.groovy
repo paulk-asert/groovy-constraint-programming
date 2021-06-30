@@ -68,3 +68,6 @@ MPSolver.createSolver("SCIP").with {solver ->
         }
     }
 }
+
+// see also:
+// https://www.kaggle.com/nbuhagiar/diet-optimization-with-or-tools
