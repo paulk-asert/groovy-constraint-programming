@@ -91,7 +91,21 @@ Technologies illustrated:
 
 ---
 
-## Technology Summary
+## Genetic algorithms
+
+This example uses genetic algorithms to explore the
+[infinite monkey theorem](https://en.wikipedia.org/wiki/Infinite_monkey_theorem).
+
+![Chimpanzee at keyboard](docs/images/Chimpanzee.png)
+
+See the [Monkeys subproject](subprojects/Monkeys/) for all the details.
+
+Technologies illustrated:
+[Apache Commons Math][],
+[Jenetics][].
+---
+
+## Technology summary
 
 Libraries used:
 
@@ -100,6 +114,7 @@ Libraries used:
 [JaCoP][],
 [OptaPlanner][],
 [OrTools][],
+[Jenetics][],
 [SAS/OR][] (commercial product).
 
 [Apache Commons Math]: https://commons.apache.org/proper/commons-math/
@@ -109,6 +124,7 @@ Libraries used:
 [OptaPlanner]: https://www.optaplanner.org/
 [OrTools]: https://developers.google.com/optimization "Google OR Tools"
 [SAS/OR]: https://www.sas.com/en_us/software/or.html
+[Jenetics]: https://jenetics.io/
 
 [Clojure]: https://clojure.org/
 [Groovy]: https://groovy-lang.org/
