@@ -26,7 +26,7 @@ dependencies {
 }
 
 FileUtil.baseNames(file("$projectDir/src/main/lua"), [], '.lua').each { name ->
-    task "run$name"(type: JavaExec) {
+    tasks.register("run$name", JavaExec) {
         group 'Script'
         description "Run ${name}.lua as a Lua script"
         classpath = sourceSets.main.runtimeClasspath
