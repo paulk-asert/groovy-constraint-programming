@@ -1,5 +1,6 @@
 //@Grab('io.jenetics:jenetics:7.0.0') // JDK17+
 //@Grab('io.jenetics:jenetics:6.3.0') // JDK11+
+//@Grab('io.jenetics:jenetics:5.2.0') // JDK8+
 // inspired by https://gist.github.com/jesuino/bc789570bff8f5d3051d8487de8d0def
 import io.jenetics.*
 import io.jenetics.engine.*
