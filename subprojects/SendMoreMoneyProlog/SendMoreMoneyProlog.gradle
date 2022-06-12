@@ -26,6 +26,6 @@ repositories {
 mainClassName = "SendMoreMoneyProlog"
 
 dependencies {
-    implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+    implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation 'it.unibo.alice.tuprolog:tuprolog:3.3.0'
 }
