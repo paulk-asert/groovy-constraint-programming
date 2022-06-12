@@ -37,7 +37,7 @@ dependencies {
 }
 
 FileUtil.baseNames(file("$projectDir/src/main/jython"), ['SendMoreMoneyConstraint'], '.py').each { name ->
-    task "run$name"(type: JavaExec) {
+    tasks.register("run$name", JavaExec) {
         group 'Script'
         description "Run ${name}.py as a Jython script"
         classpath = sourceSets.main.runtimeClasspath
