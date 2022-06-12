@@ -103,6 +103,7 @@ See the [Monkeys subproject](subprojects/Monkeys/) for all the details.
 Technologies illustrated:
 [Apache Commons Math][],
 [Jenetics][].
+
 ---
 
 ## Technology summary
