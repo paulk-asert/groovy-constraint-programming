@@ -22,7 +22,7 @@ repositories {
 dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation 'org.apache.commons:commons-math3:3.6.1'
-    implementation 'io.jenetics:jenetics:6.3.0'
+    implementation 'io.jenetics:jenetics:6.3.0' // 5.2.0 = JDK8, 7.0.0 = JDK17
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
