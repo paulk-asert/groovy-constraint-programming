@@ -29,8 +29,8 @@ repositories {
 
 mainClassName = "SendMoreMoneyBruteForce"
 
-FileUtil.baseNames(file("$projectDir/src/main/frege"), [], '.fr').each { name ->
-    task "run$name"(type: JavaExec) {
+FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.fr']).each { name ->
+    tasks.register("run$name", JavaExec) {
         dependsOn 'fregeCompile'
         group 'Script'
         description "Run ${name}.fr as a Frege script"
@@ -67,7 +67,7 @@ dependencies {
     // additional dependencies go here
 }
 
-task prepareCompileDirs { // prepare all the directories that the frege tasks rely upon
+tasks.register('prepareCompileDirs') { // prepare all the directories that the frege tasks rely upon
     group "frege"
     outputs.dir(sourceSets.main.java.outputDir).withPropertyName("compileOutputDir")
     doLast {
@@ -75,7 +75,7 @@ task prepareCompileDirs { // prepare all the directories that the frege tasks re
     }
 }
 
-task fregeCompile(type: JavaExec) {
+tasks.register('fregeCompile', JavaExec) {
     dependsOn     prepareCompileDirs
     group       = "frege"
     description = "Compile the -Pfrege_file=."
@@ -117,7 +117,7 @@ fregeCompile.doLast {
     }
 }
 
-task fregeRun(type: JavaExec) {
+tasks.register('fregeRun', JavaExec) {
     dependsOn     fregeCompile
     group         = "script"
     description   = "Run -Pclass_name=${project.mainClassName}"
