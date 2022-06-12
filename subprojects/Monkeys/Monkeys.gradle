@@ -26,7 +26,7 @@ dependencies {
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
-    task "run$name"(type: JavaExec) {
+    tasks.register("run$name", JavaExec) {
         dependsOn compileGroovy
         group 'Script'
         description "Run ${name}.groovy as a JVM application/Groovy script"
