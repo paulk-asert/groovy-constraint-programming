@@ -22,7 +22,7 @@ buildscript {
     }
     dependencies {
 //        classpath 'com.github.jruby-gradle:jruby-gradle-plugin:2.1.0-alpha.2'
-        classpath 'com.github.jruby-gradle:jruby-gradle-plugin:2.0.1'
+        classpath 'com.github.jruby-gradle:jruby-gradle-plugin:2.0.2'
     }
 }
 apply plugin: 'com.github.jruby-gradle.base'
@@ -42,9 +42,9 @@ dependencies {
 }
 
 FileUtil.baseNames(file("$projectDir/src/main/ruby"), [], '.rb').each { name ->
-    task "run$name"(type: JRubyExec) {
+    tasks.register("run$name", JRubyExec) {
         group 'Script'
-        jruby.jrubyVersion '9.2.19.0'
+        jruby.jrubyVersion '9.3.4.0'
         description "Run ${name}.rb as a JRuby script"
         script "${projectDir}/src/main/ruby/${name}.rb"
         jrubyArgs "-d", "-v"
