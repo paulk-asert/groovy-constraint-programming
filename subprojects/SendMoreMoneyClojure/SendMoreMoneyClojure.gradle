@@ -33,12 +33,12 @@ clojure {
 }
 
 dependencies {
-    implementation 'org.clojure:clojure:1.10.0'
-    implementation 'org.clojure:core.logic:1.0.0'
+    implementation 'org.clojure:clojure:1.11.1'
+    implementation 'org.clojure:core.logic:1.0.1'
     implementation 'org.clojure:math.combinatorics:0.1.6'
 }
 
-FileUtil.baseNames(file("$projectDir/src/main/clojure"), [], '.clj').each { name ->
+FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.clj']).each { name ->
     task "run$name"(type: JavaExec) {
         group 'Script'
         description "Run ${name}.clj as a Clojure script"
