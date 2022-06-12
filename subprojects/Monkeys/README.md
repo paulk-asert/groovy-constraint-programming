@@ -1,4 +1,4 @@
-# Genetics Algoritms
+# Genetics Algorithms
 
 This subproject is part of a repo illustrating [constraint programming](../..) and related technologies.
 This subproject illustrates
@@ -24,7 +24,7 @@ You have the following options to run the examples:
 
 * [running locally](../../docs/RunningLocal.md) on the command-line or in an IDE
 * [running via gitpod](../../docs/RunningGitpod.md)
-* running as a Jupyter/BeakerX notebook [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/paulk-asert/groovy-constraint-programming/master?filepath=subprojects%2FSendMoreMoney%2Fsrc%2Fmain%2Fnotebook%2FDiet.ipynb) ([more details](../../docs/RunningBeakerX.md))
+* running as a Jupyter/BeakerX notebook [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/paulk-asert/groovy-constraint-programming/master?filepath=subprojects%2FMonkeys%2Fsrc%2Fmain%2Fnotebook%2FMonkeys.ipynb) ([more details](../../docs/RunningBeakerX.md))
 * [running in the Groovy Console or Groovy Web Console](../../docs/RunningConsole.md)
 
 ---
