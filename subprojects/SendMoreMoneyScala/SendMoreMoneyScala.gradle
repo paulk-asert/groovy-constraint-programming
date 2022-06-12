@@ -30,7 +30,7 @@ repositories {
 mainClassName = "SendMoreMoneyOscar"
 
 dependencies {
-    implementation('org.scala-lang:scala-library:2.12.12') {
+    implementation('org.scala-lang:scala-library:2.12.16') {
         exclude(group: 'xml-apis', module: 'xml-apis')
     }
     implementation 'oscar:oscar-cp_2.12:4.0.0'
