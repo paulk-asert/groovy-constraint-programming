@@ -39,7 +39,7 @@ dependencies {
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.clj']).each { name ->
-    task "run$name"(type: JavaExec) {
+    tasks.register("run$name", JavaExec) {
         group 'Script'
         description "Run ${name}.clj as a Clojure script"
         classpath = sourceSets.main.runtimeClasspath
