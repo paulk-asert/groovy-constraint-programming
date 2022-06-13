@@ -36,7 +36,7 @@ def stoppingCondition = new StoppingCondition() {
         if (generation == 1 || generation % 10 == 0)
             println "Generation $generation: $fittestChromosome"
         generation++
-        fittestChromosome.fitness().abs() < 1e-6
+        fittestChromosome.fitness().abs() < 0.1d
     }
 }
 
@@ -58,11 +58,6 @@ class StringChromosome extends AbstractListChromosome<Character> {
     StringChromosome newFixedLengthChromosome(List<Character> repr) {
         new StringChromosome(repr)
     }
-
-    String toString() {
-        "(f=$fitness '${representation.join()}')"
-    }
-
 }
 
 class RandomCharacterMutation implements MutationPolicy {
