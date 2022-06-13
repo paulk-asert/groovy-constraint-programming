@@ -21,7 +21,7 @@ Function fitness = { Genotype gt ->
     }
 }
 
-def gtf = Genotype.of(CharacterChromosome.of(POSSIBLE_CHARS, DIMENSION), new Chromosome[]{})
+def gtf = Genotype.of([CharacterChromosome.of(POSSIBLE_CHARS, DIMENSION)])
 def engine = Engine.builder(fitness, gtf).offspringSelector(new RouletteWheelSelector()).build()
 def log = { EvolutionResult er -> if (er.generation() % 500 == 1) println er.bestPhenotype().genotype() }
 def result = engine.stream().limit(10000).peek(log).collect(EvolutionResult.toBestGenotype())
