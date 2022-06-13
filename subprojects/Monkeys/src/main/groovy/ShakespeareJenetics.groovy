@@ -4,15 +4,13 @@
 // inspired by https://gist.github.com/jesuino/bc789570bff8f5d3051d8487de8d0def
 import io.jenetics.*
 import io.jenetics.engine.*
+import io.jenetics.util.CharSeq
 import java.util.function.*
 
 def SENTENCE = "To be or not to be?"
 int DIMENSION = SENTENCE.size()
-def POSSIBLE_CHARS = ('a'..'z') + ('A'..'Z') + " !?.".toList()
+def POSSIBLE_CHARS = new CharSeq(('a'..'z') + ('A'..'Z') + " !?.".toList() as char[])
 int SIZE = POSSIBLE_CHARS.size()
-def r = new Random()
-
-Supplier generateRandomChar = { -> POSSIBLE_CHARS[r.nextInt(SIZE)] as char }
 
 Function fitness = { Genotype gt ->
     (0..<DIMENSION).inject(0) { sum, i ->
@@ -23,7 +21,8 @@ Function fitness = { Genotype gt ->
     }
 }
 
-def gtf = Genotype.of(AnyChromosome.of(generateRandomChar, DIMENSION), new Chromosome[]{})
+def gtf = Genotype.of(CharacterChromosome.of(POSSIBLE_CHARS, DIMENSION), new Chromosome[]{})
 def engine = Engine.builder(fitness, gtf).offspringSelector(new RouletteWheelSelector()).build()
-def result = engine.stream().limit(10000).collect(EvolutionResult.toBestGenotype())
+def log = { EvolutionResult er -> if (er.generation() % 500 == 1) println er.bestPhenotype().genotype() }
+def result = engine.stream().limit(10000).peek(log).collect(EvolutionResult.toBestGenotype())
 println "Result: $result"
