@@ -1,15 +1,15 @@
 //@Grab('org.apache.commons:commons-math3:3.6.1')
 // inspired by https://github.com/apache/commons-math/blob/MATH_3_X/src/userguide/java/org/apache/commons/math3/userguide/genetics/HelloWorldExample.java
 
-import groovy.transform.InheritConstructors
+import groovy.transform.*
 import org.apache.commons.math3.genetics.*
 import static org.apache.commons.math3.genetics.GeneticAlgorithm.randomGenerator as r
 
 class Scenario {
-    static getSENTENCE() { "To be or not to be?" }
-    static getDIMENSION() { SENTENCE.size() }
-    static private POSSIBLE_CHARS = ('a'..'z') + ('A'..'Z') + " !?.".toList()
-    static private SIZE = POSSIBLE_CHARS.size()
+    public static SENTENCE = "To be or not to be?"
+    public static DIMENSION = SENTENCE.size()
+    private static POSSIBLE_CHARS = ('a'..'z') + ('A'..'Z') + " !?.".toList()
+    private static SIZE = POSSIBLE_CHARS.size()
     static getRandomChar() { POSSIBLE_CHARS[r.nextInt(SIZE)] as char }
 }
 
@@ -44,7 +44,7 @@ println "Starting evolution ..."
 Population finalPopulation = ga.evolve(initial, stoppingCondition)
 println "Generation $ga.generationsEvolved: $finalPopulation.fittestChromosome"
 
-@InheritConstructors
+@InheritConstructors @AutoImplement
 class StringChromosome extends AbstractListChromosome<Character> {
     double fitness() {
         (0..<Scenario.DIMENSION).inject(0) { sum, i ->
@@ -54,8 +54,6 @@ class StringChromosome extends AbstractListChromosome<Character> {
             sum - (target - allele).abs()
         }
     }
-
-    protected void checkValidity(List<Character> repr) throws InvalidRepresentationException { }
 
     StringChromosome newFixedLengthChromosome(List<Character> repr) {
         new StringChromosome(repr)
