@@ -5,14 +5,13 @@
 import io.jenetics.*
 import io.jenetics.engine.*
 import io.jenetics.util.CharSeq
-import java.util.function.*
 
 def SENTENCE = "To be or not to be?"
 int DIMENSION = SENTENCE.size()
 def POSSIBLE_CHARS = new CharSeq(('a'..'z') + ('A'..'Z') + " !?.".toList() as char[])
 int SIZE = POSSIBLE_CHARS.size()
 
-Function fitness = { Genotype gt ->
+def fitness = { Genotype gt ->
     (0..<DIMENSION).inject(0) { sum, i ->
         def target = SENTENCE.charAt(i)
         def allele = gt.chromosome().get(i).allele()
