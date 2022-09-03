@@ -43,7 +43,7 @@ dependencies {
 
 FileUtil.baseNames(file("$projectDir/src/main/ruby"), [], '.rb').each { name ->
     tasks.register("run$name", JRubyExec) {
-        group 'Script'
+        group 'Application'
         jruby.jrubyVersion '9.3.4.0'
         description "Run ${name}.rb as a JRuby script"
         script "${projectDir}/src/main/ruby/${name}.rb"

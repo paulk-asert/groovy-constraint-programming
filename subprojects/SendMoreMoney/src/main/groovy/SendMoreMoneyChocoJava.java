@@ -33,13 +33,13 @@ public class SendMoreMoneyChocoJava {
         m.allDifferent(S, E, N, D, M, O, R, Y).post();
 
         IntVar[] ALL = {
-                S, E, N, D,
-                M, O, R, E,
-                M, O, N, E, Y};
+                  S, E, N, D,
+                  M, O, R, E,
+               M, O, N, E, Y };
         int[] COEFFS = {
-                1000, 100, 10, 1,
-                1000, 100, 10, 1,
-                -10000, -1000, -100, -10, -1};
+                   1000,  100,  10,  1,
+                   1000,  100,  10,  1,
+          -10000, -1000, -100, -10, -1};
         m.scalar(ALL, COEFFS, "=", 0).post();
 
         long start = currentTimeMillis();

@@ -26,12 +26,13 @@ dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
     implementation "com.google.ortools:ortools-java:$ortoolsVersion"
+    implementation "org.jacop:jacop:$jacopVersion"
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
     tasks.register("run$name", JavaExec) {
         dependsOn compileGroovy
-        group 'Script'
+        group 'Application'
         description "Run ${name}.groovy as a JVM application/Groovy script"
         classpath = sourceSets.main.runtimeClasspath
         main = name

@@ -35,7 +35,7 @@ using Choco[1] and Ojalgo[2].
 
 Command-line arguments for Gradle to see the task names for the available solutions:
 ```
-:McNuggets:tasks --group="Script"
+:McNuggets:tasks --group="Application"
 ```
 Then pick one of those tasks to run, e.g. to run the Ojalgo solution:
 ```

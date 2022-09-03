@@ -23,7 +23,7 @@ dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
     implementation "org.ojalgo:ojalgo:$ojalgoVersion"
-    implementation 'org.jacop:jacop:4.8.0'
+    implementation "org.jacop:jacop:$jacopVersion"
     implementation 'org.apache.commons:commons-math3:3.6.1'
     implementation 'org.optaplanner:optaplanner-core:7.71.0.Final'
     implementation 'ch.qos.logback:logback-classic:1.2.11' // optional for optaplanner debugging
@@ -33,7 +33,7 @@ dependencies {
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
     tasks.register("run$name", JavaExec) {
         dependsOn compileGroovy
-        group 'Script'
+        group 'Application'
         description "Run ${name}.groovy as a JVM application/Groovy script"
         classpath = sourceSets.main.runtimeClasspath
         main = name

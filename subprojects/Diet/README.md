@@ -36,7 +36,7 @@ You have the following options to run the examples:
 
 Command-line arguments for Gradle to see the task names for the available solutions:
 ```
-gradlew :Diet:tasks --group="Script"
+gradlew :Diet:tasks --group="Application"
 ```
 Then pick one of those tasks to run, e.g. to run the Apache Commons Math solution:
 ```

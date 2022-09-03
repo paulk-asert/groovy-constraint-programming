@@ -50,7 +50,7 @@ gradlew :SendMoreMoney:run
 
 Command-line arguments for Gradle to see the task names for the JavaScript and various Groovy solutions:
 ```
-gradlew :SendMoreMoney:tasks --group="Script"
+gradlew :SendMoreMoney:tasks --group="Application"
 ```
 Then pick one of those tasks to run, e.g. to run the Groovy permutations example:
 ```
@@ -59,12 +59,12 @@ gradlew :SendMoreMoney:runSendMoreMoneyPermutations
 
 For the other languages, choose the appropriate subproject and arguments:
 ```
-gradlew :SendMoreMoneyClojure:tasks --group="Script"
-gradlew :SendMoreMoneyFrege:tasks --group="Script"
-gradlew :SendMoreMoneyJRuby:tasks --group="Script"
-gradlew :SendMoreMoneyJython:tasks --group="Script"
+gradlew :SendMoreMoneyClojure:tasks --group="Application"
+gradlew :SendMoreMoneyFrege:tasks --group="Application"
+gradlew :SendMoreMoneyJRuby:tasks --group="Application"
+gradlew :SendMoreMoneyJython:tasks --group="Application"
 gradlew :SendMoreMoneyKotlin:run
-gradlew :SendMoreMoneyLuaj:tasks --group="Script"
+gradlew :SendMoreMoneyLuaj:tasks --group="Application"
 gradlew :SendMoreMoneyProlog:run
 gradlew :SendMoreMoneyScala:run
 ```

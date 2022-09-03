@@ -7,7 +7,7 @@ Once loaded, run one of the available script tasks. To find
 available script tasks you can try something like:
 
 ```
-> ./gradlew :McNuggets:tasks --group="Scripts"
+> ./gradlew :McNuggets:tasks --group="Application"
 ```
 
 You should see something like below:

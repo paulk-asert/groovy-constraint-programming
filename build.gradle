@@ -17,6 +17,9 @@
 plugins {
     id 'org.kordamp.gradle.project' version '0.47.0'
     id 'com.github.ben-manes.versions' version '0.42.0'
+    // uncomment next plugin if using JDK11+ and checking buildHealth
+    // you might also need to comment out some parts of the kotlin build since it relies on JDK8
+    //id 'com.autonomousapps.dependency-analysis' version '1.12.0'
 }
 
 config {
