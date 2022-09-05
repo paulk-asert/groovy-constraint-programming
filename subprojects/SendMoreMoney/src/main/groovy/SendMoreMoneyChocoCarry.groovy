@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.choco-solver:choco-solver:4.10.5')
+//@Grab('org.choco-solver:choco-solver:4.10.9')
 import org.chocosolver.solver.Model
-import org.chocosolver.solver.variables.IntVar
 import static java.lang.System.currentTimeMillis
 
 new Model("SEND+MORE=MONEY").with {
     def (S, M) = ['S', 'M'].collect { intVar(it, 1, 9) }
     def (E, N, D, O, R, Y) = ['E', 'N', 'D', 'O', 'R', 'Y'].collect { intVar(it, 0, 9) }
-    def C = new IntVar[4]
-    for (n in 0..<C.size()) { C[n] = intVar(0, 1) }
+    def C = (0..3).collect{ intVar("C$it", 0, 9) }
 
     allDifferent(S, E, N, D, M, O, R, Y).post()
     C[3]              .eq(M).post()

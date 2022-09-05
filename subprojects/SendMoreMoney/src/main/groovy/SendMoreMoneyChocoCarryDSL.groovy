@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.choco-solver:choco-solver:4.10.5')
+//@Grab('org.choco-solver:choco-solver:4.10.9')
 import groovy.transform.CompileStatic
 import groovy.transform.Immutable
 import org.chocosolver.solver.Model
@@ -28,7 +28,7 @@ model("SEND+MORE=MONEY") {
     def (E, N, D, O, R, Y) = ['E', 'N', 'D', 'O', 'R', 'Y'].collect { intVar(it, 0..9) }
     def C = intVarArray(4, 0..1)
 
-    [allDifferent(S, E, N, D, M, O, R, Y),      //   C3 C2 C1 C0
+    [allDifferent(S, E, N, D, M, O, R, Y),      //  C3 C2 C1 C0
      C[3]         .eq(M),                       //      S  E  N  D
     (C[2] + S + M).eq(O + C[3] * 10),           //      M  O  R  E
     (C[1] + E + O).eq(N + C[2] * 10),           //   -------------

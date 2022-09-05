@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 def digits = 0..9
+long start = System.currentTimeMillis()
 for (p in digits.permutations()) {
     if (p[-1] < p[-2]) continue
     def (s, e, n, d, m, o, r, y) = p
@@ -26,3 +27,4 @@ for (p in digits.permutations()) {
         println "m = $m, o = $o, r = $r, y = $y"
     }
 }
+println System.currentTimeMillis() - start

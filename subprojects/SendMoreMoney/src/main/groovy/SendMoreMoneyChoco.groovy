@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.choco-solver:choco-solver:4.10.5')
+//@Grab('org.choco-solver:choco-solver:4.10.9')
 import org.chocosolver.solver.Model
 import org.chocosolver.solver.variables.IntVar
 import static java.lang.System.currentTimeMillis
@@ -30,11 +30,12 @@ new Model("SEND+MORE=MONEY").with {
     IntVar[] ALL = [
             S, E, N, D,
             M, O, R, E,
-            M, O, N, E, Y]
+         M, O, N, E, Y ]
     int[] COEFFS = [
-            1000, 100, 10, 1,
-            1000, 100, 10, 1,
-            -10000, -1000, -100, -10, -1]
+            1000,  100,  10,  1,
+            1000,  100,  10,  1,
+   -10000, -1000, -100, -10, -1 ]
+
     scalar(ALL, COEFFS, "=", 0).post()
 
     def start = currentTimeMillis()

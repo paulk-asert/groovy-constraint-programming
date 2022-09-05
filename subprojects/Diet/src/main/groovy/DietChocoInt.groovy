@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.choco-solver:choco-solver:4.10.5')
+//@Grab('org.choco-solver:choco-solver:4.10.9')
 import org.chocosolver.solver.Model
 import org.chocosolver.solver.variables.IntVar
 
