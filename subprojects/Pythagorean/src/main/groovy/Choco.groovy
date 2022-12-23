@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.choco-solver:choco-solver:4.10.9')
+//@Grab('org.choco-solver:choco-solver:4.10.10')
 import org.chocosolver.solver.Model
 
 // find pythagorean-triples for a, b, c <= 30

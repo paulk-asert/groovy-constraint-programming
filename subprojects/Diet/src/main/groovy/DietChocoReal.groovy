@@ -15,7 +15,7 @@
  */
 // need to point to ibex installation
 // JAVA_OPTS=-Djava.library.path=/usr/local/lib
-//@Grab('org.choco-solver:choco-solver:4.10.9')
+//@Grab('org.choco-solver:choco-solver:4.10.10')
 import org.chocosolver.solver.Model
 import org.chocosolver.solver.variables.RealVar
 
