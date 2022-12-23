@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.apache.commons:commons-math3:3.6.1')
-import org.apache.commons.math3.optim.linear.*
-import org.apache.commons.math3.optim.nonlinear.scalar.GoalType
-import static org.apache.commons.math3.optim.linear.Relationship.*
+//@Grab('org.apache.commons:commons-math4-legacy:4.0-beta1')
+import org.apache.commons.math4.legacy.optim.linear.*
+import org.apache.commons.math4.legacy.optim.nonlinear.scalar.GoalType
+import static org.apache.commons.math4.legacy.optim.linear.Relationship.*
 
 def cost = new LinearObjectiveFunction([2.0, 3.5, 8.0, 1.5, 11.0, 1.0] as double[], 0)
 

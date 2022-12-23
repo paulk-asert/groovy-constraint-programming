@@ -33,7 +33,7 @@ dependencies {
         exclude(group: 'com.javasolver', module :'jsr331-choco2')
     }
     runtimeOnly files('lib/choco-solver-2.1.5.jar')
-    runtimeOnly 'org.slf4j:slf4j-simple:2.0.0'
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.6'
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->

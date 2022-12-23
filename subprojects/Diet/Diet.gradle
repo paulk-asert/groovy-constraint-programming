@@ -24,7 +24,7 @@ dependencies {
     implementation "org.choco-solver:choco-solver:$chocoVersion"
     implementation "org.ojalgo:ojalgo:$ojalgoVersion"
     implementation "org.jacop:jacop:$jacopVersion"
-    implementation 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
     implementation 'org.optaplanner:optaplanner-core:7.71.0.Final'
     implementation 'ch.qos.logback:logback-classic:1.2.11' // optional for optaplanner debugging
     implementation "com.google.ortools:ortools-java:$ortoolsVersion"
