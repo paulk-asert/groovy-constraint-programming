@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.ojalgo:ojalgo:51.3.0')
+//@Grab('org.ojalgo:ojalgo:52.0.1')
 import org.ojalgo.optimisation.ExpressionsBasedModel
 import static org.ojalgo.netio.BasicLogger.debug
 
@@ -35,7 +35,6 @@ totalNuggets.set(packs20, 20)
 for (int i : 100..1) {
     totalNuggets.upper(i)
     def result = model.maximise()
-
     if (Math.round(result.value) < i) {
         debug("Not possible to order $i nuggets")
         break
