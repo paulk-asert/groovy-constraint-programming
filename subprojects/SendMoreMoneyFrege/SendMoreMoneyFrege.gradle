@@ -35,7 +35,7 @@ FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.fr']).each { name ->
         group 'Application'
         description "Run ${name}.fr as a Frege script"
         classpath = sourceSets.main.runtimeClasspath
-        main = name
+        mainClassName = name
     }
 }
 

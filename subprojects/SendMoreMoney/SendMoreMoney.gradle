@@ -42,6 +42,6 @@ FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
         group 'Application'
         description "Run ${name}.groovy as a JVM application/Groovy script"
         classpath = sourceSets.main.runtimeClasspath
-        main = name
+        mainClassName = name
     }
 }

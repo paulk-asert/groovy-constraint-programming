@@ -44,6 +44,6 @@ FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.clj']).each { name ->
         group 'Application'
         description "Run ${name}.clj as a Clojure script"
         classpath = sourceSets.main.runtimeClasspath
-        main = name
+        mainClassName = name
     }
 }

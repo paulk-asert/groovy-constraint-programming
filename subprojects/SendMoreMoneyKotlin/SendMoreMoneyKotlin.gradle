@@ -16,7 +16,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.7.10"
+    id "org.jetbrains.kotlin.jvm" version "1.7.22"
     id 'application'
 }
 
@@ -27,7 +27,7 @@ repositories {
 mainClassName = "SendMoreMoneyChocoKtxKt"
 
 dependencies {
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.22'
     implementation files('lib/choco-ktx-0.0.8.jar')
     // above file replaces below until it appears in a public repo - was in bintray
     //implementation 'ar.com.agomez:choco-ktx:0.0.8'
