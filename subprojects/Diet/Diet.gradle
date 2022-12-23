@@ -19,10 +19,12 @@ repositories {
     mavenCentral()
 }
 
+ext.ojalgo = JavaVersion.current().isJava8() ? ojalgoLegacyVersion : ojalgoVersion
+
 dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
-    implementation "org.ojalgo:ojalgo:$ojalgoVersion"
+    implementation "org.ojalgo:ojalgo:$ojalgo"
     implementation "org.jacop:jacop:$jacopVersion"
     implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
     implementation 'org.optaplanner:optaplanner-core:7.71.0.Final'

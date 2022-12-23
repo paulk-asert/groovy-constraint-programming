@@ -19,10 +19,12 @@ repositories {
     mavenCentral()
 }
 
+ext.ojalgo = JavaVersion.current().isJava8() ? ojalgoLegacyVersion : ojalgoVersion
+
 dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
-    implementation "org.ojalgo:ojalgo:$ojalgoVersion"
+    implementation "org.ojalgo:ojalgo:$ojalgo"
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
