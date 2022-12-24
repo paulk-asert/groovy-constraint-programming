@@ -82,6 +82,7 @@ See the [Diet subproject](subprojects/Diet/) for all the details.
 
 Technologies illustrated:
 [Apache Commons Math][],
+[Hipparchus][],
 [Choco][] (with and without ibex integration),
 [JaCoP][] (using scalar-product/weighted-sum and knapsack algorithms),
 [Ojalgo][],
@@ -111,6 +112,7 @@ Technologies illustrated:
 Libraries used:
 
 [Choco][],
+[Hipparchus][],
 [Apache Commons Math][],
 [JaCoP][],
 [OptaPlanner][],
@@ -119,6 +121,7 @@ Libraries used:
 [SAS/OR][] (commercial product).
 
 [Apache Commons Math]: https://commons.apache.org/proper/commons-math/
+[Hipparchus]: https://hipparchus.org/
 [Choco]: http://www.choco-solver.org/
 [Ojalgo]: https://www.ojalgo.org/
 [JaCoP]: https://github.com/radsz/jacop

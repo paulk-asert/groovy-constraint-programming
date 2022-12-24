@@ -27,6 +27,7 @@ dependencies {
     implementation "org.ojalgo:ojalgo:$ojalgo"
     implementation "org.jacop:jacop:$jacopVersion"
     implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
+    implementation 'org.hipparchus:hipparchus-optim:2.3'
     implementation 'org.optaplanner:optaplanner-core:7.71.0.Final'
     implementation 'ch.qos.logback:logback-classic:1.2.11' // optional for optaplanner debugging
     implementation "com.google.ortools:ortools-java:$ortoolsVersion"
