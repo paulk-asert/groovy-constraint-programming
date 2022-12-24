@@ -32,7 +32,7 @@ repositories {
 //}
 
 dependencies {
-    implementation 'org.python:jython-standalone:2.7.2'
+    implementation 'org.python:jython-standalone:2.7.3'
 //    jython ":python-constraint:1.4.0"
 }
 
@@ -41,7 +41,7 @@ FileUtil.baseNames(file("$projectDir/src/main/jython"), ['SendMoreMoneyConstrain
         group 'Application'
         description "Run ${name}.py as a Jython script"
         classpath = sourceSets.main.runtimeClasspath
-        main = 'org.python.util.jython'
+        mainClass = 'org.python.util.jython'
         args "$projectDir/src/main/jython/${name}.py"
     }
 }

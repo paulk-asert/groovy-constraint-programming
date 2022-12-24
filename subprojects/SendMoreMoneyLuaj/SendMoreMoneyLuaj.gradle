@@ -30,7 +30,7 @@ FileUtil.baseNames(file("$projectDir/src/main/lua"), [], '.lua').each { name ->
         group 'Application'
         description "Run ${name}.lua as a Lua script"
         classpath = sourceSets.main.runtimeClasspath
-        main = 'lua'
+        mainClass = 'lua'
         args "$projectDir/src/main/lua/${name}.lua"
     }
 }
