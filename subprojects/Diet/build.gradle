@@ -24,17 +24,23 @@ dependencies {
     implementation "org.jacop:jacop:$jacopVersion"
     implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
     implementation 'org.hipparchus:hipparchus-optim:3.0'
-    implementation 'org.optaplanner:optaplanner-core:7.71.0.Final'
+    implementation 'org.optaplanner:optaplanner-core:7.73.0.Final'
     implementation 'ch.qos.logback:logback-classic:1.4.14' // optional for optaplanner debugging
     implementation "com.google.ortools:ortools-java:$ortoolsVersion"
 }
 
-FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
-    tasks.register("run$name", JavaExec) {
+def runall = tasks.register('runAll') {
+    group 'Application'
+}
+FileUtil.baseNames(sourceSets.main.allSource.files, ['DietChocoReal','DietConstraintProvider','DietSolution','Food']).each { name ->
+    def subtask = tasks.register("run$name", JavaExec) {
         dependsOn compileGroovy
         group 'Application'
         description "Run ${name}.groovy as a JVM application/Groovy script"
         classpath = sourceSets.main.runtimeClasspath
         mainClass = name
+    }
+    runall.configure {
+        dependsOn subtask
     }
 }
