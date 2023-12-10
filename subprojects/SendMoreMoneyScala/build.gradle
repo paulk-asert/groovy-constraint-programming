@@ -13,23 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 plugins {
-    id 'com.github.ben-manes.versions' version '0.50.0'
+    id 'scala'
+    id 'application'
 }
 
-ext.UNSTABLE = /^([0-9,.-]+[.-](alpha|beta|rc)[.\d-]*)|20030203.000550$/
-// ignore non-stable releases
-tasks.named("dependencyUpdates").configure {
-    gradleReleaseChannel = 'current'
-    outputFormatter = 'plain'
-    rejectVersionIf {
-        !(it.currentVersion.toLowerCase() ==~ UNSTABLE) && it.candidate.version.toLowerCase() ==~ UNSTABLE
-    }
-}
+//repositories {
+//    maven {
+//        url = 'https://maven.pkg.github.com/pschaus/oscar'
+//    }
+//}
 
-allprojects {
-    repositories {
-        mavenCentral()
-    }
+mainClassName = "SendMoreMoneyOscar"
+
+dependencies {
+    implementation 'org.scala-lang:scala-library:2.13.12'
+    implementation fileTree(dir: 'lib', include: ['*.jar'])
+//    implementation 'oscar:oscar-cp_2.13:5.0.0'
 }

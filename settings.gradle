@@ -13,19 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 buildscript {
     repositories {
         gradlePluginPortal()
-    }
-    dependencies {
-        classpath 'org.kordamp.gradle:settings-gradle-plugin:0.47.0'
     }
 }
 
 rootProject.name = 'groovy-constraint-programming'
 
-apply plugin: 'org.kordamp.gradle.settings'
+def subprojects = [
+        'Diet',
+        'McNuggets',
+        'Monkeys',
+        'Pythagorean',
+        'SendMoreMoney',
+        'SendMoreMoneyClojure',
+        'SendMoreMoneyFrege',
+        'SendMoreMoneyJRuby',
+        'SendMoreMoneyJython',
+        'SendMoreMoneyKotlin',
+        'SendMoreMoneyLuaj',
+        'SendMoreMoneyProlog',
+        'SendMoreMoneyScala'
+]
 
-projects {
-    directories = ['docs', 'subprojects']
+include(subprojects as String[])
+
+rootProject.children.each { prj ->
+    prj.projectDir = new File("$rootDir/subprojects/$prj.name")
 }

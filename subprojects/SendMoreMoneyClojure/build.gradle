@@ -14,34 +14,35 @@
  * limitations under the License.
  */
 plugins {
-    id 'java'
-//    id "com.github.rzabini.gradle-jython" version "1.0.10"
-//    id 'com.github.hierynomus.jython' version '0.6.0'
+    id 'dev.clojurephant.clojure' version '0.8.0-beta.2'
 }
-
-//apply plugin: 'jython'
 
 repositories {
-    mavenCentral()
+    maven {
+        url = 'https://repo.clojars.org/'
+    }
 }
 
-//jython {
-//    sourceRepositories = []
-//    repository 'pypiLegacy'// doesn't know about bz2
-//    pypackage "python-constraint:1.4.0" // hard-codes .tar.gz
-//}
+clojure {
+    builds {
+        main {
+            aotAll()
+        }
+    }
+}
 
 dependencies {
-    implementation 'org.python:jython-standalone:2.7.3'
-//    jython ":python-constraint:1.4.0"
+    implementation 'org.clojure:clojure:1.11.1'
+    implementation 'org.clojure:core.logic:1.0.1'
+    implementation 'org.clojure:math.combinatorics:0.2.0'
+    runtimeOnly 'nrepl:nrepl:1.1.0'
 }
 
-FileUtil.baseNames(file("$projectDir/src/main/jython"), ['SendMoreMoneyConstraint'], '.py').each { name ->
+FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.clj']).each { name ->
     tasks.register("run$name", JavaExec) {
         group 'Application'
-        description "Run ${name}.py as a Jython script"
+        description "Run ${name}.clj as a Clojure script"
         classpath = sourceSets.main.runtimeClasspath
-        mainClass = 'org.python.util.jython'
-        args "$projectDir/src/main/jython/${name}.py"
+        mainClass = name
     }
 }

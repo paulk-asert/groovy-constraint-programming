@@ -15,22 +15,29 @@
  */
 plugins {
     id 'java'
+//    id "com.github.rzabini.gradle-jython" version "1.1.0"
+//    id 'com.github.hierynomus.jython' version '0.6.0'
 }
 
-repositories {
-    mavenCentral()
-}
+//apply plugin: 'jython'
+
+//jython {
+//    sourceRepositories = []
+//    repository 'pypiLegacy'// doesn't know about bz2
+//    pypackage "python-constraint:1.4.0" // hard-codes .tar.gz
+//}
 
 dependencies {
-    implementation 'org.luaj:luaj-jse:3.0.1'
+    implementation 'org.python:jython-standalone:2.7.3'
+//    jython ":python-constraint:1.4.0"
 }
 
-FileUtil.baseNames(file("$projectDir/src/main/lua"), [], '.lua').each { name ->
+FileUtil.baseNames(file("$projectDir/src/main/jython"), ['SendMoreMoneyConstraint'], '.py').each { name ->
     tasks.register("run$name", JavaExec) {
         group 'Application'
-        description "Run ${name}.lua as a Lua script"
+        description "Run ${name}.py as a Jython script"
         classpath = sourceSets.main.runtimeClasspath
-        mainClass = 'lua'
-        args "$projectDir/src/main/lua/${name}.lua"
+        mainClass = 'org.python.util.jython'
+        args "$projectDir/src/main/jython/${name}.py"
     }
 }

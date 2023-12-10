@@ -23,10 +23,6 @@ plugins {
     id 'application'
 }
 
-repositories {
-    mavenCentral()
-}
-
 mainClassName = "SendMoreMoneyBruteForce"
 
 FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.fr']).each { name ->

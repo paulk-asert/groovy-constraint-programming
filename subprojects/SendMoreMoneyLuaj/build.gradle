@@ -14,36 +14,19 @@
  * limitations under the License.
  */
 plugins {
-    id 'dev.clojurephant.clojure' version '0.8.0-beta.1'
-}
-
-repositories {
-    mavenCentral()
-    maven {
-        url = 'https://repo.clojars.org/'
-    }
-}
-
-clojure {
-    builds {
-        main {
-            aotAll()
-        }
-    }
+    id 'java'
 }
 
 dependencies {
-    implementation 'org.clojure:clojure:1.11.1'
-    implementation 'org.clojure:core.logic:1.0.1'
-    implementation 'org.clojure:math.combinatorics:0.1.6'
-    runtimeOnly 'nrepl:nrepl:1.0.0'
+    implementation 'org.luaj:luaj-jse:3.0.1'
 }
 
-FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.clj']).each { name ->
+FileUtil.baseNames(file("$projectDir/src/main/lua"), [], '.lua').each { name ->
     tasks.register("run$name", JavaExec) {
         group 'Application'
-        description "Run ${name}.clj as a Clojure script"
+        description "Run ${name}.lua as a Lua script"
         classpath = sourceSets.main.runtimeClasspath
-        mainClass = name
+        mainClass = 'lua'
+        args "$projectDir/src/main/lua/${name}.lua"
     }
 }

@@ -13,25 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
-    id 'scala'
+    id 'groovy'
     id 'application'
 }
 
-repositories {
-    mavenCentral()
-    maven {
-        // warning: https not supported on that repo
-        url = 'http://artifactory.info.ucl.ac.be/artifactory/libs-release'
-        allowInsecureProtocol = true
-    }
-}
-
-mainClassName = "SendMoreMoneyOscar"
+mainClassName = "SendMoreMoneyProlog"
 
 dependencies {
-    implementation('org.scala-lang:scala-library:2.12.17') {
-        exclude(group: 'xml-apis', module: 'xml-apis')
-    }
-    implementation 'oscar:oscar-cp_2.12:4.0.0'
+    implementation "org.apache.groovy:groovy:$groovy4Version"
+    implementation 'it.unibo.alice.tuprolog:tuprolog:3.3.0'
 }

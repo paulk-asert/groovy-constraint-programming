@@ -13,19 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+apply plugin: 'groovy'
+apply plugin: 'application'
 
-plugins {
-    id 'groovy'
-    id 'application'
-}
-
-repositories {
-    mavenCentral()
-}
-
-mainClassName = "SendMoreMoneyProlog"
+mainClassName = "Choco"
 
 dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
-    implementation 'it.unibo.alice.tuprolog:tuprolog:3.3.0'
+    implementation "org.choco-solver:choco-solver:$chocoVersion"
 }

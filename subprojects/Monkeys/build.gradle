@@ -15,16 +15,10 @@
  */
 apply plugin: 'groovy'
 
-repositories {
-    mavenCentral()
-}
-
-ext.ojalgo = JavaVersion.current().isJava8() ? ojalgoLegacyVersion : ojalgoVersion
-
 dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
-    implementation "org.choco-solver:choco-solver:$chocoVersion"
-    implementation "org.ojalgo:ojalgo:$ojalgo"
+    implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
+    implementation 'io.jenetics:jenetics:6.3.0' // 5.2.0 = JDK8, 7.1.1 = JDK17
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->

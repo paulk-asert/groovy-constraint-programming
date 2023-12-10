@@ -16,13 +16,28 @@
 apply plugin: 'groovy'
 apply plugin: 'application'
 
-repositories {
-    mavenCentral()
-}
-
-mainClassName = "Choco"
+mainClassName = 'SendMoreMoneyChocoJava'
 
 dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
+    implementation "com.google.ortools:ortools-java:$ortoolsVersion"
+    implementation("org.jacop:jacop:$jacopVersion") {
+        exclude(group: 'org.slf4j', module :'slf4j-log4j12')
+    }
+    implementation('com.javasolver:jsr331-choco:2.2.0') {
+        exclude(group: 'com.javasolver', module :'jsr331-choco2')
+    }
+    runtimeOnly files('lib/choco-solver-2.1.5.jar')
+    runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
+}
+
+FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
+    tasks.register("run$name", JavaExec) {
+        dependsOn compileGroovy
+        group 'Application'
+        description "Run ${name}.groovy as a JVM application/Groovy script"
+        classpath = sourceSets.main.runtimeClasspath
+        mainClass = name
+    }
 }
