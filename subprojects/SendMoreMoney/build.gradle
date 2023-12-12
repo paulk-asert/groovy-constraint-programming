@@ -32,12 +32,20 @@ dependencies {
     runtimeOnly 'org.slf4j:slf4j-simple:2.0.9'
 }
 
+def runall = tasks.register('runAll') {
+    group 'Application'
+    dependsOn run
+}
+
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
-    tasks.register("run$name", JavaExec) {
+    def subtask = tasks.register("run$name", JavaExec) {
         dependsOn compileGroovy
         group 'Application'
         description "Run ${name}.groovy as a JVM application/Groovy script"
         classpath = sourceSets.main.runtimeClasspath
         mainClass = name
+    }
+    runall.configure {
+        dependsOn subtask
     }
 }
