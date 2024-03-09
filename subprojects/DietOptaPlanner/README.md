@@ -1,20 +1,11 @@
 # Linear Programming
 
 This subproject is part of a repo illustrating [constraint programming](../..).
-This subproject
-illustrates solving an optimization/linear programming problem
-using
-Apache Commons Math,
-Choco (with and without ibex integration),
-Jacop (using scalar-product/weighted-sum and knapsack algorithms),
-Ojalgo,
-OrTools,
-and SAS/OR.
-The slides also show solving this example using Excel and Google sheets.
+This subproject illustrates solving an optimization/linear
+programming problem using OptaPlanner.
 
-See also:
-[Optaplanner solution](../DietOptaPlanner).
-[Timefold solution](../DietTimefold).
+See also: [Timefold solution](../DietTimefold).
+See also: [Other solutions](../Diet).
 
 ---
 

@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.apache.commons:commons-math3:3.6.1')
-import org.apache.commons.math3.optim.linear.*
-import org.apache.commons.math3.optim.nonlinear.scalar.GoalType
-import static org.apache.commons.math3.optim.linear.Relationship.*
+import org.apache.commons.math4.legacy.optim.linear.*
+import org.apache.commons.math4.legacy.optim.nonlinear.scalar.GoalType
+import static org.apache.commons.math4.legacy.optim.linear.Relationship.*
 import static java.lang.Double.NaN
 
 class DietSolver {

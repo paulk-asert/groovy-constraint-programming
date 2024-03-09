@@ -13,10 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.optaplanner:optaplanner-core:7.46.0.Final')
-import opta.DietSolution
-import opta.Food
-import org.optaplanner.core.api.solver.SolverFactory
+
+import ai.timefold.solver.core.config.solver.SolverConfig
+import timefold.DietConstraintProvider
+import timefold.DietSolution
+import timefold.Food
+import ai.timefold.solver.core.api.solver.SolverFactory
+
+import java.time.Duration
 
 def unsolved = new DietSolution(foods: [
         new Food(name: 'Bread', cost: 2.0, protein: 4.0, fat: 1.0, carbs: 15.0, calories: 90),
@@ -27,7 +31,12 @@ def unsolved = new DietSolution(foods: [
         new Food(name: 'Yogurt', cost: 1.0, protein: 9.2, fat: 1.0, carbs: 17.0, calories: 180)
 ])
 
-def factory = SolverFactory.createFromXmlResource("dietSolverConfig.xml")
+def config = new SolverConfig()
+    .withSolutionClass(DietSolution)
+    .withEntityClasses(Food)
+    .withConstraintProviderClass(DietConstraintProvider)
+    .withTerminationSpentLimit(Duration.ofSeconds(10))
+def factory = SolverFactory.create(config)
 def solver = factory.buildSolver()
 def solved = solver.solve(unsolved)
 println solved.pretty()

@@ -24,6 +24,8 @@ rootProject.name = 'groovy-constraint-programming'
 
 def subprojects = [
         'Diet',
+        'DietOptaPlanner',
+        'DietTimefold',
         'McNuggets',
         'Monkeys',
         'Pythagorean',

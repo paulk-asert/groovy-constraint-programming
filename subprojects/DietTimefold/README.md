@@ -1,20 +1,11 @@
 # Linear Programming
 
 This subproject is part of a repo illustrating [constraint programming](../..).
-This subproject
-illustrates solving an optimization/linear programming problem
-using
-Apache Commons Math,
-Choco (with and without ibex integration),
-Jacop (using scalar-product/weighted-sum and knapsack algorithms),
-Ojalgo,
-OrTools,
-and SAS/OR.
-The slides also show solving this example using Excel and Google sheets.
+This subproject illustrates solving an optimization/linear
+programming problem using Timefold.
 
-See also:
-[Optaplanner solution](../DietOptaPlanner).
-[Timefold solution](../DietTimefold).
+See also: [OptaPlanner solution](../DietOptaPlanner).
+See also: [Other solutions](../Diet).
 
 ---
 
@@ -37,9 +28,13 @@ You have the following options to run the examples:
 
 ### Execution via Gradle
 
-Command-line arguments for Gradle:
+Command-line arguments for Gradle to see the task names for the available solutions:
 ```
-gradlew :DietOptaPlanner:run
+gradlew :DietOpta:tasks --group="Application"
+```
+Then pick one of those tasks to run, e.g. to run the Apache Commons Math solution:
+```
+gradlew :Diet:runDietOptaPlanner
 ```
 
 ---
