@@ -19,7 +19,7 @@ apply plugin: 'application'
 dependencies {
     implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation 'ai.timefold.solver:timefold-solver-core:1.7.0'
-    implementation 'ch.qos.logback:logback-classic:1.4.14' // optional for debugging
+    implementation 'ch.qos.logback:logback-classic:1.5.3' // optional for debugging
 }
 
 mainClassName = "DietTimefold"
