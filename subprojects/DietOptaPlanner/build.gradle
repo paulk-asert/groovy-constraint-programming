@@ -24,3 +24,10 @@ dependencies {
 
 mainClassName = "DietOptaPlanner"
 
+tasks.register('printRuntimeClasspath') {
+    doLast {
+        def jars = sourceSets.main.runtimeClasspath.findAll{it.name.endsWith('.jar') }
+        println "${jars.size()} jars in classpath:"
+        println jars*.name.join('\n')
+    }
+}
