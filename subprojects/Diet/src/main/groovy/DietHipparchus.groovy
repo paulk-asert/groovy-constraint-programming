@@ -44,7 +44,9 @@ var cost = new LinearObjectiveFunction([2.0, 3.5, 8.0, 1.5, 11.0, 1.0] as double
 
 var solution = new SimplexSolver().optimize(cost, constraints, MAXIMIZE)
 
-if (solution) {
-    println "Opt: $solution.value"
-    println solution.point.collect{ sprintf '%.2f', it }.join(', ')
+static pretty(double d) { sprintf '%.2f', d }
+
+if (solution != null) {
+    println "Opt: ${pretty(solution.value)}"
+    println solution.point.collect(this::pretty).join(', ')
 }

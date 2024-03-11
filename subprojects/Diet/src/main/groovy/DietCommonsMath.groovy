@@ -13,33 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//@Grab('org.apache.commons:commons-math4-legacy:4.0-beta1')
+
 import org.apache.commons.math4.legacy.optim.linear.*
-import org.apache.commons.math4.legacy.optim.nonlinear.scalar.GoalType
+
 import static org.apache.commons.math4.legacy.optim.linear.Relationship.*
+import static org.apache.commons.math4.legacy.optim.nonlinear.scalar.GoalType.MAXIMIZE
 
-def cost = new LinearObjectiveFunction([2.0, 3.5, 8.0, 1.5, 11.0, 1.0] as double[], 0)
+static scalar(coeffs, rel, val) {
+    new LinearConstraint(coeffs as double[], rel, val)
+}
 
-static scalar(coeffs, rel, val) { new LinearConstraint(coeffs as double[], rel, val) }
+var bread_min  = scalar([1, 0, 0, 0, 0, 0], GEQ, 0)
+var milk_min   = scalar([0, 1, 0, 0, 0, 0], GEQ, 0)
+var milk_max   = scalar([0, 1, 0, 0, 0, 0], LEQ, 1)
+var cheese_min = scalar([0, 0, 1, 0, 0, 0], GEQ, 0)
+var potato_min = scalar([0, 0, 0, 1, 0, 0], GEQ, 0)
+var fish_min   = scalar([0, 0, 0, 0, 1, 0], GEQ, 0.5)
+var yogurt_min = scalar([0, 0, 0, 0, 0, 1], GEQ, 0)
+var protein    = scalar([4.0, 8.0, 7.0, 1.3, 8.0, 9.2],     LEQ, 10)
+var fat        = scalar([1.0, 5.0, 9.0, 0.1, 7.0, 1.0],     GEQ, 8)
+var carbs      = scalar([15.0, 11.7, 0.4, 22.6, 0.0, 17.0], GEQ, 10)
+var calories   = scalar([90, 120, 106, 97, 130, 180],       GEQ, 300)
 
-def bread_min  = scalar([1, 0, 0, 0, 0, 0], GEQ, 0)
-def milk_min   = scalar([0, 1, 0, 0, 0, 0], GEQ, 0)
-def milk_max   = scalar([0, 1, 0, 0, 0, 0], LEQ, 1)
-def cheese_min = scalar([0, 0, 1, 0, 0, 0], GEQ, 0)
-def potato_min = scalar([0, 0, 0, 1, 0, 0], GEQ, 0)
-def fish_min   = scalar([0, 0, 0, 0, 1, 0], GEQ, 0.5)
-def yogurt_min = scalar([0, 0, 0, 0, 0, 1], GEQ, 0)
-def protein    = scalar([4.0, 8.0, 7.0, 1.3, 8.0, 9.2],     LEQ, 10)
-def fat        = scalar([1.0, 5.0, 9.0, 0.1, 7.0, 1.0],     GEQ, 8)
-def carbs      = scalar([15.0, 11.7, 0.4, 22.6, 0.0, 17.0], GEQ, 10)
-def calories   = scalar([90, 120, 106, 97, 130, 180],       GEQ, 300)
+LinearConstraintSet constraints = [
+        bread_min, milk_min, milk_max, fish_min, cheese_min,
+        potato_min, yogurt_min, protein, fat, carbs, calories
+]
 
-LinearConstraintSet constraints = [bread_min, milk_min, milk_max, fish_min, cheese_min,
-                                   potato_min, yogurt_min, protein, fat, carbs, calories]
+var cost = new LinearObjectiveFunction([2.0, 3.5, 8.0, 1.5, 11.0, 1.0] as double[], 0)
 
-def solution = new SimplexSolver().optimize(cost, constraints, GoalType.MAXIMIZE)
+var solution = new SimplexSolver().optimize(cost, constraints, MAXIMIZE)
+
+static pretty(double d) { sprintf '%.2f', d }
 
 if (solution != null) {
-    println "Opt: $solution.value"
-    println solution.point.collect{ sprintf '%.2f', it }.join(', ')
+    println "Opt: ${pretty(solution.value)}"
+    println solution.point.collect(this::pretty).join(', ')
 }
