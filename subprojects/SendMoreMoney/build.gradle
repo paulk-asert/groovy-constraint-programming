@@ -38,6 +38,8 @@ def runall = tasks.register('runAll') {
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
+    if (name.contains('JavaScript') && JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_15))
+        return // Nashorn removed in JDK15
     def subtask = tasks.register("run$name", JavaExec) {
         dependsOn compileGroovy
         group 'Application'
