@@ -37,9 +37,11 @@ var zeroOrMore = new NonNegativeConstraint(true)
 
 var solution = new SimplexSolver().optimize(cost, constraints, zeroOrMore)
 
-static pretty(double d) { sprintf '%.2f', d }
+static pretty(int idx, double d) {
+    d ? [sprintf('%s %.2f', ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶'][idx], d)] : []
+}
 
 if (solution != null) {
-    println "Opt: ${pretty(solution.value)}"
-    println solution.point.collect(this::pretty).join(', ')
+    printf "Cost: %.2f%n", solution.value
+    println solution.point.indexed().collectMany(this::pretty).join(', ')
 }
