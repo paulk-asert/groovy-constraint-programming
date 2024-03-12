@@ -17,7 +17,6 @@
 import org.hipparchus.optim.linear.*
 
 import static org.hipparchus.optim.linear.Relationship.*
-import static org.hipparchus.optim.nonlinear.scalar.GoalType.MINIMIZE
 
 static scalar(coeffs, rel, double val) {
     new LinearConstraint(coeffs as double[], rel, val)
@@ -42,7 +41,7 @@ LinearConstraintSet constraints = [
 
 var cost = new LinearObjectiveFunction([2.0, 3.5, 8.0, 1.5, 11.0, 1.0] as double[], 0)
 
-var solution = new SimplexSolver().optimize(cost, constraints, MINIMIZE)
+var solution = new SimplexSolver().optimize(cost, constraints)
 
 static pretty(double d) { sprintf '%.2f', d }
 
