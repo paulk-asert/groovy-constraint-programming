@@ -45,37 +45,43 @@ class DietConstraintProvider implements ConstraintProvider {
 
     private static Constraint minField(ConstraintFactory factory, String fieldName, double minAmount) {
         ToIntFunction<Food> amount = f -> amountOf(f, fieldName)
-        factory.from(Food).filter(f -> f.amount > 0)
+        factory.forEach(Food)
                 .groupBy(sum(amount))
                 .filter(fs -> fs < minAmount * 100)
-                .penalize("Min $fieldName", ONE_HARD)
+                .penalize(ONE_HARD)
+                .asConstraint("Min $fieldName")
     }
 
     private static Constraint maxField(ConstraintFactory factory, String fieldName, double maxAmount) {
         ToIntFunction<Food> amount = f -> amountOf(f, fieldName)
-        factory.from(Food).filter(f -> f.amount > 0)
+        factory.forEach(Food)
                 .groupBy(sum(amount))
                 .filter(fs -> fs > maxAmount * 100)
-                .penalize("Max $fieldName", ONE_HARD)
+                .penalize(ONE_HARD)
+                .asConstraint("Max $fieldName")
     }
 
     private static Constraint minFood(ConstraintFactory factory, String foodName, double minAmount) {
-        factory.from(Food)
+        factory.forEach(Food)
                 .filter(f -> f.name == foodName && f.amount < minAmount)
-                .penalize("Min $foodName", ONE_HARD)
+                .penalize(ONE_HARD)
+                .asConstraint("Min $foodName")
     }
 
     private static Constraint maxFood(ConstraintFactory factory, String foodName, double maxAmount) {
-        factory.from(Food)
+        factory.forEach(Food)
                 .filter(f -> f.name == foodName && f.amount > maxAmount)
-                .penalize("Max $foodName", ONE_HARD)
+                .penalize(ONE_HARD)
+                .asConstraint("Max $foodName")
     }
 
     private static ToIntFunction<Food> totalCost = f -> (f.cost * f.amount).toInteger()
 
     private static Constraint minCost(ConstraintFactory factory) {
-        factory.from(Food).filter(f -> f.amount > 0)
+        factory.forEach(Food)
+                .filter(f -> f.amount > 0)
                 .groupBy(sum(totalCost))
-                .penalize('Min cost', ONE_SOFT, fs -> fs >> 2)
+                .penalize(ONE_SOFT, fs -> fs >> 2)
+                .asConstraint('Min cost')
     }
 }

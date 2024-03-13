@@ -32,21 +32,21 @@ class DietSolution {
 
     @ValueRangeProvider(id = "amount")
     CountableValueRange<Integer> getAmount() {
-        ValueRangeFactory.createIntValueRange(0, 200)
+        ValueRangeFactory.createIntValueRange(0, 200, 5)
     }
 
     @PlanningScore
     HardSoftScore score
 
-    String pretty() {
-        def sb = new StringBuilder()
-        foods.each {
-            sb << "$it.name: ${it.amount / 100}\n"
+    void display() {
+        foods.eachWithIndex { f, idx ->
+            def emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
+            println "${emoji[idx]} f.name: ${f.amount / 100}"
         }
         for (name in ['fat', 'carbs', 'protein', 'calories', 'cost']) {
-            sb << "Total $name: ${foods.sum{ f -> f."$name" * f.amount / 100 }}\n"
+            var total = foods.sum{ f -> f."$name" * f.amount / 100 }
+            printf "Total %s: %.2f%n", name, total
         }
-        sb << "Score: $score"
-        sb
+        println "Score: $score"
     }
 }
