@@ -15,7 +15,6 @@
  */
 package timefold
 
-import groovy.transform.ToString
 import ai.timefold.solver.core.api.domain.solution.PlanningEntityCollectionProperty
 import ai.timefold.solver.core.api.domain.solution.PlanningScore
 import ai.timefold.solver.core.api.domain.solution.PlanningSolution
@@ -25,7 +24,6 @@ import ai.timefold.solver.core.api.domain.valuerange.ValueRangeProvider
 import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore
 
 @PlanningSolution
-@ToString(includeNames = true, includePackage = false)
 class DietSolution {
     @PlanningEntityCollectionProperty
     List<Food> foods
@@ -38,15 +36,17 @@ class DietSolution {
     @PlanningScore
     HardSoftScore score
 
-    void display() {
+    String toString() {
+        var sb = new StringBuilder()
+        var emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
         foods.eachWithIndex { f, idx ->
-            def emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
-            println "${emoji[idx]} f.name: ${f.amount / 100}"
+            sb << "${emoji[idx]} $f.name: ${f.amount / 100}\n"
         }
         for (name in ['fat', 'carbs', 'protein', 'calories', 'cost']) {
             var total = foods.sum{ f -> f."$name" * f.amount / 100 }
-            printf "Total %s: %.2f%n", name, total
+            sb << sprintf("Total %s: %.2f%n", name, total)
         }
-        println "Score: $score"
+        sb << "Score: $score"
+        sb
     }
 }

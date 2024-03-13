@@ -15,7 +15,6 @@
  */
 package opta
 
-import groovy.transform.ToString
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty
 import org.optaplanner.core.api.domain.solution.PlanningScore
 import org.optaplanner.core.api.domain.solution.PlanningSolution
@@ -25,7 +24,6 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore
 
 @PlanningSolution
-@ToString(includeNames = true, includePackage = false)
 class DietSolution {
     @PlanningEntityCollectionProperty
     List<Food> foods
@@ -38,15 +36,17 @@ class DietSolution {
     @PlanningScore
     HardSoftScore score
 
-    void display() {
+    String toString() {
+        var sb = new StringBuilder()
+        var emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
         foods.eachWithIndex { f, idx ->
-            var emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
-            println "${emoji[idx]} $f.name: ${f.amount / 100}"
+            sb << "${emoji[idx]} $f.name: ${f.amount / 100}\n"
         }
         for (name in ['fat', 'carbs', 'protein', 'calories', 'cost']) {
             var total = foods.sum{ f -> f."$name" * f.amount / 100 }
-            printf "Total %s: %.2f%n", name, total
+            sb << sprintf("Total %s: %.2f%n", name, total)
         }
-        println "Score: $score"
+        sb << "Score: $score"
+        sb
     }
 }

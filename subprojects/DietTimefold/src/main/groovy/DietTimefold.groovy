@@ -55,20 +55,19 @@ def config = new SolverConfig()
 
 def factory = SolverFactory.create(config)
 def solver = factory.buildSolver()
-def solved = solver.solve(unsolved)
-solved.display()
+println solver.solve(unsolved)
 
 /*
-23:26:50.629 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Solving started: time spent (31), best score (-6init/0hard/0soft), environment mode (REPRODUCIBLE), move thread count (NONE), random (JDK with seed 0).
-23:26:50.811 [main] INFO  a.t.s.c.i.c.DefaultConstructionHeuristicPhase - Construction Heuristic phase (0) ended: time spent (214), best score (-1hard/-521soft), score calculation speed (1379/sec), step total (6).
-23:27:00.597 [main] INFO  a.t.s.c.i.l.DefaultLocalSearchPhase - Local Search phase (1) ended: time spent (10000), best score (0hard/-308soft), score calculation speed (295993/sec), step total (14096).
-23:27:00.598 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Solving ended: time spent (10000), best score (0hard/-308soft), score calculation speed (289654/sec), phase total (2), environment mode (REPRODUCIBLE), move thread count (NONE).
-Bread: 0
-Milk: 0
-Cheese: 0.5
-Potato: 1.9
-Fish: 0.5
-Yogurt: 0
+08:04:32.865 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Solving started: time spent (31), best score (-6init/0hard/0soft), environment mode (REPRODUCIBLE), move thread count (NONE), random (JDK with seed 0).
+08:04:33.057 [main] INFO  a.t.s.c.i.c.DefaultConstructionHeuristicPhase - Construction Heuristic phase (0) ended: time spent (225), best score (-1hard/-521soft), score calculation speed (1304/sec), step total (6).
+08:04:42.832 [main] INFO  a.t.s.c.i.l.DefaultLocalSearchPhase - Local Search phase (1) ended: time spent (10000), best score (0hard/-308soft), score calculation speed (287094/sec), step total (13656).
+08:04:42.833 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Solving ended: time spent (10000), best score (0hard/-308soft), score calculation speed (280601/sec), phase total (2), environment mode (REPRODUCIBLE), move thread count (NONE).
+🍞 Bread: 0
+🥛 Milk: 0
+🧀 Cheese: 0.5
+🥔 Potato: 1.9
+🐟 Fish: 0.5
+🍶 Yogurt: 0
 Total fat: 8.19
 Total carbs: 43.14
 Total protein: 9.97

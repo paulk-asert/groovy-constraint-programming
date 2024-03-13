@@ -56,5 +56,4 @@ def config = new SolverConfig()
 
 def factory = SolverFactory.create(config)
 def solver = factory.buildSolver()
-def solved = solver.solve(unsolved)
-solved.display()
+println solver.solve(unsolved)
