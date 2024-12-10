@@ -23,7 +23,7 @@ dependencies {
     implementation "org.ojalgo:ojalgo:$ojalgo"
     implementation "org.jacop:jacop:$jacopVersion"
     implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
-    implementation 'org.hipparchus:hipparchus-optim:3.0'
+    implementation 'org.hipparchus:hipparchus-optim:3.1'
     implementation "com.google.ortools:ortools-java:$ortoolsVersion"
 }
 
