@@ -30,6 +30,7 @@ dependencies {
 def runall = tasks.register('runAll') {
     group 'Application'
 }
+
 FileUtil.baseNames(sourceSets.main.allSource.files, ['DietChocoReal']).each { name ->
     def subtask = tasks.register("run$name", JavaExec) {
         dependsOn compileGroovy
