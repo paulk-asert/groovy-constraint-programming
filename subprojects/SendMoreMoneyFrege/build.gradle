@@ -65,9 +65,9 @@ dependencies {
 
 tasks.register('prepareCompileDirs') { // prepare all the directories that the frege tasks rely upon
     group "frege"
-    outputs.dir(sourceSets.main.java.outputDir).withPropertyName("compileOutputDir")
+    outputs.dir(sourceSets.main.java.classesDirectory).withPropertyName("compileOutputDir")
     doLast {
-        ant.mkdir(dir: sourceSets.main.java.outputDir)
+        ant.mkdir(dir: sourceSets.main.java.classesDirectory)
     }
 }
 
@@ -78,7 +78,7 @@ tasks.register('fregeCompile', JavaExec) {
     classpath   = files fregeJar
     args([
             "-d",                                  //  target directory for *.java and *.class files
-            sourceSets.main.java.outputDir,
+            sourceSets.main.java.classesDirectory,
             "-fp",                                 //  frege path: where to find imported frege packages
             sourceSets.main.compileClasspath.asPath,
             "-enc", "UTF-8",                       //  charset for source code files, standard is UTF-8
@@ -107,7 +107,7 @@ tasks.register('fregeCompile', JavaExec) {
 // a java source dir to work better with the standard tooling (e.g. the jar task and IDE assumptions).
 fregeCompile.doLast {
     ant.move(toDir: fregeMainJavaDir) {
-        fileSet(dir: sourceSets.main.java.outputDir) {
+        fileSet(dir: sourceSets.main.java.classesDirectory) {
             include name:"**/*.java"
         }
     }
@@ -119,7 +119,7 @@ tasks.register('fregeRun', JavaExec) {
     description   = "Run -Pclass_name=${project.mainClassName}"
     standardInput = System.in       // this might run interactively, so we need stdin
     classpath     = files sourceSets.main.runtimeClasspath.asPath
-    main          = project.hasProperty("class_name") ? project.class_name : project.mainClassName
+    mainClassName = project.hasProperty("class_name") ? project.class_name : project.mainClassName
 }
 
 compileJava.dependsOn fregeCompile
