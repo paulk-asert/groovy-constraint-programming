@@ -35,7 +35,7 @@ RealVar[] all = [bread, milk, cheese, potato, fish, yogurt]
 def scalarIbex = { coeffs, var ->
     def (a, b, c, d, e, f) = coeffs
     model.realIbexGenericConstraint("$a*{0}+$b*{1}+$c*{2}+$d*{3}+$e*{4}+$f*{5}={6}",
-            [*all, var] as RealVar[]).post();
+            [*all, var] as RealVar[]).post()
 }
 
 def cost = model.realVar("Cost", 0.0, unbounded, precision)
