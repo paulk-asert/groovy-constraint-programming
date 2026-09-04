@@ -31,7 +31,7 @@ import java.time.Duration
 import static org.optaplanner.core.config.constructionheuristic.ConstructionHeuristicType.FIRST_FIT
 import static org.optaplanner.core.config.localsearch.LocalSearchType.VARIABLE_NEIGHBORHOOD_DESCENT
 
-def unsolved = new DietSolution(foods: [
+val unsolved = new DietSolution(foods: [
         new Food(name: 'Bread',  cost:  2.0, protein: 4.0, fat: 1.0, carbs: 15.0, calories:  90),
         new Food(name: 'Milk',   cost:  3.5, protein: 8.0, fat: 5.0, carbs: 11.7, calories: 120),
         new Food(name: 'Cheese', cost:  8.0, protein: 7.0, fat: 9.0, carbs:  0.4, calories: 106),
@@ -40,20 +40,20 @@ def unsolved = new DietSolution(foods: [
         new Food(name: 'Yogurt', cost:  1.0, protein: 9.2, fat: 1.0, carbs: 17.0, calories: 180)
 ])
 
-def construction = new ConstructionHeuristicPhaseConfig(constructionHeuristicType: FIRST_FIT)
-def moveSelector = new UnionMoveSelectorConfig([
+val construction = new ConstructionHeuristicPhaseConfig(constructionHeuristicType: FIRST_FIT)
+val moveSelector = new UnionMoveSelectorConfig([
         new ChangeMoveSelectorConfig(),
         new SwapMoveSelectorConfig()
 ])
-def localSearch = new LocalSearchPhaseConfig(localSearchType: VARIABLE_NEIGHBORHOOD_DESCENT,
+val localSearch = new LocalSearchPhaseConfig(localSearchType: VARIABLE_NEIGHBORHOOD_DESCENT,
         moveSelectorConfig: moveSelector)
-def config = new SolverConfig()
+val config = new SolverConfig()
         .withSolutionClass(DietSolution)
         .withEntityClasses(Food)
         .withConstraintProviderClass(DietConstraintProvider)
         .withPhases(construction, localSearch)
         .withTerminationSpentLimit(Duration.ofSeconds(10))
 
-def factory = SolverFactory.create(config)
-def solver = factory.buildSolver()
+val factory = SolverFactory.create(config)
+val solver = factory.buildSolver()
 println solver.solve(unsolved)

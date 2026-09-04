@@ -15,13 +15,14 @@
  */
 
 plugins {
-    id 'groovy'
+    id 'groovy-setup'
     id 'application'
 }
 
-mainClassName = "SendMoreMoneyProlog"
+application {
+    mainClass = 'SendMoreMoneyProlog'
+}
 
 dependencies {
-    implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation 'it.unibo.alice.tuprolog:tuprolog:3.3.0'
 }

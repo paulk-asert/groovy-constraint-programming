@@ -19,10 +19,10 @@ import ai.timefold.solver.core.api.score.stream.Constraint
 import ai.timefold.solver.core.api.score.stream.ConstraintFactory
 import ai.timefold.solver.core.api.score.stream.ConstraintProvider
 
-import java.util.function.ToIntFunction
+import java.util.function.ToLongFunction
 
-import static ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore.ONE_HARD
-import static ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore.ONE_SOFT
+import static ai.timefold.solver.core.api.score.HardSoftScore.ONE_HARD
+import static ai.timefold.solver.core.api.score.HardSoftScore.ONE_SOFT
 import static ai.timefold.solver.core.api.score.stream.ConstraintCollectors.sum
 
 class DietConstraintProvider implements ConstraintProvider {
@@ -39,12 +39,12 @@ class DietConstraintProvider implements ConstraintProvider {
         }
     }
 
-    private static int amountOf(Food f, String name) {
-        (f."$name" * f.amount).toInteger()
+    private static long amountOf(Food f, String name) {
+        (f."$name" * f.amount).toLong()
     }
 
     private static Constraint minField(ConstraintFactory factory, String fieldName, double minAmount) {
-        ToIntFunction<Food> amount = f -> amountOf(f, fieldName)
+        ToLongFunction<Food> amount = f -> amountOf(f, fieldName)
         factory.forEach(Food)
                 .groupBy(sum(amount))
                 .filter(fs -> fs < minAmount * 100)
@@ -53,7 +53,7 @@ class DietConstraintProvider implements ConstraintProvider {
     }
 
     private static Constraint maxField(ConstraintFactory factory, String fieldName, double maxAmount) {
-        ToIntFunction<Food> amount = f -> amountOf(f, fieldName)
+        ToLongFunction<Food> amount = f -> amountOf(f, fieldName)
         factory.forEach(Food)
                 .groupBy(sum(amount))
                 .filter(fs -> fs > maxAmount * 100)
@@ -75,7 +75,7 @@ class DietConstraintProvider implements ConstraintProvider {
                 .asConstraint("Max $foodName")
     }
 
-    private static ToIntFunction<Food> totalCost = f -> (f.cost * f.amount).toInteger()
+    private static ToLongFunction<Food> totalCost = f -> (f.cost * f.amount).toLong()
 
     private static Constraint minCost(ConstraintFactory factory) {
         factory.forEach(Food)

@@ -20,14 +20,14 @@ import com.google.ortools.constraintsolver.Solver
 Loader.loadNativeLibraries()
 
 new Solver('Send+More=Money').with {
-    def s = makeIntVar(1, 9, 's')
-    def e = makeIntVar(0, 9, 'e')
-    def n = makeIntVar(0, 9, 'n')
-    def d = makeIntVar(0, 9, 'd')
-    def m = makeIntVar(1, 9, 'm')
-    def o = makeIntVar(0, 9, 'o')
-    def r = makeIntVar(0, 9, 'r')
-    def y = makeIntVar(0, 9, 'y')
+    val s = makeIntVar(1, 9, 's')
+    val e = makeIntVar(0, 9, 'e')
+    val n = makeIntVar(0, 9, 'n')
+    val d = makeIntVar(0, 9, 'd')
+    val m = makeIntVar(1, 9, 'm')
+    val o = makeIntVar(0, 9, 'o')
+    val r = makeIntVar(0, 9, 'r')
+    val y = makeIntVar(0, 9, 'y')
 
     IntVar[] all = [s, e, n, d, m, o, r, y]
     IntVar[] scalar = [s, e, n, d, m, o, r, e, m, o, n, e, y]
@@ -40,7 +40,7 @@ new Solver('Send+More=Money').with {
     addConstraint(makeScalProdEquality(scalar, coeffs, 0))
     addConstraint(makeAllDifferent(all))
 
-    def db = makePhase(all, INT_VAR_DEFAULT, INT_VALUE_DEFAULT)
+    val db = makePhase(all, INT_VAR_DEFAULT, INT_VALUE_DEFAULT)
     newSearch(db)
     while (nextSolution()) {
         println all.join(' ')

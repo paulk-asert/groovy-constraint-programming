@@ -33,8 +33,8 @@ ProblemFactory.newProblem('SEND+MORE=MONEY').with {
 
     post(COEFFS, ALL, '=', 0)
 
-    def solver = getSolver()
-    def solution = solver.findSolution()
+    val solver = getSolver()
+    val solution = solver.findSolution()
     println solution ?: 'No solution'
     solver.logStats()
 }

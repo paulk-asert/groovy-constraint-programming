@@ -20,7 +20,7 @@ import static java.lang.System.currentTimeMillis
 new Model("SEND+MORE=MONEY").with {
     def (S, M) = ['S', 'M'].collect { intVar(it, 1, 9) }
     def (E, N, D, O, R, Y) = ['E', 'N', 'D', 'O', 'R', 'Y'].collect { intVar(it, 0, 9) }
-    def C = (0..3).collect{ intVar("C$it", 0, 9) }
+    val C = (0..3).collect{ intVar("C$it", 0, 9) }
 
     allDifferent(S, E, N, D, M, O, R, Y).post()
     C[3]              .eq(M).post()
@@ -29,7 +29,7 @@ new Model("SEND+MORE=MONEY").with {
     C[0].add(N).add(R).eq(E.add(C[1].mul(10))).post()
              D .add(E).eq(Y.add(C[0].mul(10))).post()
 
-    def start = currentTimeMillis()
+    val start = currentTimeMillis()
     println solver.findSolution()
     println "Solved in ${currentTimeMillis() - start} millis"
 }

@@ -1,0 +1,49 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Common setup for every subproject: repositories and a JDK toolchain.
+// The default JDK comes from the `javaVersion` property in gradle.properties.
+// A subproject can pick a different JDK with:
+//
+//     java {
+//         toolchain {
+//             languageVersion = JavaLanguageVersion.of(17)
+//         }
+//     }
+//
+// Gradle will use an installed JDK of that version (see `gradlew javaToolchains`).
+
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion as int)
+    }
+}
+
+// JDK 24+ warns when libraries use JNI/FFM; silence that when running on such a JDK.
+// The flag is evaluated lazily so per-subproject toolchain overrides are respected.
+tasks.withType(JavaExec).configureEach {
+    jvmArgumentProviders.add({
+        java.toolchain.languageVersion.get().asInt() >= 22 ? ['--enable-native-access=ALL-UNNAMED'] : []
+    } as CommandLineArgumentProvider)
+}

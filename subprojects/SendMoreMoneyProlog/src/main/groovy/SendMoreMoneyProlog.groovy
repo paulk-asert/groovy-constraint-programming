@@ -17,7 +17,7 @@
 //@Grab('it.unibo.alice.tuprolog:tuprolog:3.3.0')
 import alice.tuprolog.*
 
-def theory = '''
+val theory = '''
 omit(H, [H|T], T).
 omit(X, [H|T1], [H|T2]) :- omit(X, T1, T2).
 
@@ -38,7 +38,7 @@ solve(Line1, Line2, Line3) :-
         Line1 = [S,E,N,D], Line2 = [M,O,R,E], Line3 = [M,O,N,E,Y].
 '''
 
-def engine = new Prolog()
+val engine = new Prolog()
 engine.setTheory(new Theory(theory))
 def info = engine.solve('solve(SEND, MORE, MONEY).')
 while (info.success) {

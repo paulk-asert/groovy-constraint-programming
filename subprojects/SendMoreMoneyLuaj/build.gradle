@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
-    id 'java'
+    id 'java-setup'
 }
 
 dependencies {
@@ -23,8 +24,8 @@ dependencies {
 
 FileUtil.baseNames(file("$projectDir/src/main/lua"), [], '.lua').each { name ->
     tasks.register("run$name", JavaExec) {
-        group 'Application'
-        description "Run ${name}.lua as a Lua script"
+        group = 'Application'
+        description = "Run ${name}.lua as a Lua script"
         classpath = sourceSets.main.runtimeClasspath
         mainClass = 'lua'
         args "$projectDir/src/main/lua/${name}.lua"

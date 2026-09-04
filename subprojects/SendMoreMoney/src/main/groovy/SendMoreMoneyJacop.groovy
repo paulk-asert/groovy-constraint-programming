@@ -24,10 +24,10 @@ import org.jacop.search.InputOrderSelect
 
 import static java.lang.System.currentTimeMillis
 
-def store = new Store()
+val store = new Store()
 def (S, M) = ['S', 'M'].collect { new IntVar(store, it, 1, 9) }
 def (E, N, D, O, R, Y) = ['E', 'N', 'D', 'O', 'R', 'Y'].collect { new IntVar(store, it, 0, 9) }
-var ctr = new Alldifferent(S, E, N, D, M, O, R, Y)
+val ctr = new Alldifferent(S, E, N, D, M, O, R, Y)
 store.impose(ctr)
 
 IntVar[] ALL = [
@@ -38,11 +38,11 @@ int[] COEFFS = [
              1000,  100,  10,  1,
              1000,  100,  10,  1,
     -10000, -1000, -100, -10, -1 ]
-var lin = new LinearInt(ALL, COEFFS, "==", 0)
+val lin = new LinearInt(ALL, COEFFS, "==", 0)
 store.impose(lin)
 
-def start = currentTimeMillis()
-var label = new DepthFirstSearch()
-var select = new InputOrderSelect(store, ALL, new IndomainMin())
+val start = currentTimeMillis()
+val label = new DepthFirstSearch()
+val select = new InputOrderSelect(store, ALL, new IndomainMin())
 label.labeling(store, select)
 println "Solved in ${currentTimeMillis() - start} millis"

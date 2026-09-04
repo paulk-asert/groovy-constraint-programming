@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply plugin: 'groovy'
 
-dependencies {
-    implementation "org.apache.groovy:groovy:$groovy4Version"
-    implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
-    implementation 'io.jenetics:jenetics:6.3.0' // 5.2.0 = JDK8, 7.1.1 = JDK17
+plugins {
+    id 'groovy-setup'
 }
 
-FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
-    tasks.register("run$name", JavaExec) {
-        dependsOn compileGroovy
-        group 'Application'
-        description "Run ${name}.groovy as a JVM application/Groovy script"
-        classpath = sourceSets.main.runtimeClasspath
-        mainClass = name
-    }
+dependencies {
+    implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
+    implementation 'io.jenetics:jenetics:6.3.0' // 5.2.0 = JDK8, 7.1.1 = JDK17
 }

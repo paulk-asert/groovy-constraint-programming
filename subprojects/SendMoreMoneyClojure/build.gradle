@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 plugins {
+    id 'java-setup'
     id 'dev.clojurephant.clojure' version '0.8.0-beta.7'
 }
 
@@ -39,13 +40,13 @@ dependencies {
 }
 
 def runall = tasks.register('runAll') {
-    group 'Application'
+    group = 'Application'
 }
 
 FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.clj']).each { name ->
     def subtask = tasks.register("run$name", JavaExec) {
-        group 'Application'
-        description "Run ${name}.clj as a Clojure script"
+        group = 'Application'
+        description = "Run ${name}.clj as a Clojure script"
         classpath = sourceSets.main.runtimeClasspath
         mainClass = name
     }

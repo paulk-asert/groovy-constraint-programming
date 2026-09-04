@@ -23,39 +23,39 @@ import org.jacop.search.DepthFirstSearch
 import org.jacop.search.IndomainMin
 import org.jacop.search.SimpleSelect
 
-def store = new Store()
+val store = new Store()
 
-def unbounded = 100000
+val unbounded = 100000
 // scale quantities by 10, coefficients by 10, products by 100
-def bread  = new IntVar(store, 'bread',  0, unbounded)
-def milk   = new IntVar(store, 'milk',   0, 10)
-def cheese = new IntVar(store, 'cheese', 0, unbounded)
-def potato = new IntVar(store, 'potato', 0, unbounded)
-def fish   = new IntVar(store, 'fish',   5, unbounded)
-def yogurt = new IntVar(store, 'yogurt', 0, unbounded)
+val bread  = new IntVar(store, 'bread',  0, unbounded)
+val milk   = new IntVar(store, 'milk',   0, 10)
+val cheese = new IntVar(store, 'cheese', 0, unbounded)
+val potato = new IntVar(store, 'potato', 0, unbounded)
+val fish   = new IntVar(store, 'fish',   5, unbounded)
+val yogurt = new IntVar(store, 'yogurt', 0, unbounded)
 
 IntVar[] all = [bread, milk, cheese, potato, fish, yogurt]
 int[] price = [20, 35, 80, 15, 110, 10]
-def cost = new IntVar(store, 'Cost', 0, unbounded)
+val cost = new IntVar(store, 'Cost', 0, unbounded)
 
-def protein = new IntVar(store, 'Protein', 0, 1000)
+val protein = new IntVar(store, 'Protein', 0, 1000)
 store.impose(new Knapsack([40, 80, 70, 13, 80, 92] as int[], price, all, cost, protein))
 
-def fat = new IntVar(store, 'Fat', 800, unbounded)
+val fat = new IntVar(store, 'Fat', 800, unbounded)
 store.impose(new Knapsack([10, 50, 90, 1, 70, 10] as int[], price, all, cost, fat))
 
-def carbs = new IntVar(store, 'Carbohydrates', 1000, unbounded)
+val carbs = new IntVar(store, 'Carbohydrates', 1000, unbounded)
 // carbs variable can lead to -ve profit which violates knapsack
 //store.impose(new Knapsack([150, 117, 4, 226, 0, 170] as int[], price, all, cost, carbs))
 store.impose(new LinearInt(all, [150, 117, 4, 226, 0, 170] as int[], '=', carbs))
 
-def calories = new IntVar(store, 'Calories', 30000, unbounded)
+val calories = new IntVar(store, 'Calories', 30000, unbounded)
 store.impose(new Knapsack([900, 1200, 1060, 970, 1300, 1800] as int[], price, all, cost, calories))
 
-def search = new DepthFirstSearch<IntVar>()
-def select = new SimpleSelect<IntVar>(all, null, new IndomainMin<IntVar>())
+val search = new DepthFirstSearch<IntVar>()
+val select = new SimpleSelect<IntVar>(all, null, new IndomainMin<IntVar>())
 
-def result = search.labeling(store, select, cost)
+val result = search.labeling(store, select, cost)
 println result
 if (result) store.print()
 

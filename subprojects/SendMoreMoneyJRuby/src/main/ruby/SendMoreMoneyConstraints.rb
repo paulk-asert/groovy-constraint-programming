@@ -16,7 +16,7 @@ puts "GEM_HOME: #{ENV['GEM_HOME']}"
 puts "GEM_PATH: #{ENV['GEM_PATH']}"
 puts "Ruby vers: #{RUBY_VERSION}, JRuby vers: #{JRUBY_VERSION}"
 
-require 'csp-solver'
+require 'csp' # entry point of the csp-solver gem
 
 # Solves the send+more=money problem:
 # http://en.wikipedia.org/wiki/Send%2Bmore%3Dmoney
@@ -27,17 +27,17 @@ def digits_to_decimal(*digits)
 end
 
 # variables
-problem.vars([:s, :m], 1..10)
-problem.vars([:e, :n, :d, :o, :r, :y], 0..10)
+problem.vars([:s, :m], 1..9)
+problem.vars([:e, :n, :d, :o, :r, :y], 0..9)
 letters = [:s, :e, :n, :d, :m, :o, :r, :y]
 problem.all_different(letters)
 
 # constraints
-problem.constraint(letters) { | s, e, n, d, m, o, r, y |
+problem.constrain(*letters) { | s, e, n, d, m, o, r, y |
   (digits_to_decimal(s, e, n, d) + digits_to_decimal(m, o, r, e)) ==
     digits_to_decimal(m, o, n, e, y)
 }
 
+solution = problem.solve
 puts 's e n d m o r y'
-problem.solve
-puts letters.values.join(' ')
+puts letters.map { |l| solution[l] }.join(' ')

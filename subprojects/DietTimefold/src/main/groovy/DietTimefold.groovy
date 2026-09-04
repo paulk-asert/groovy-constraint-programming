@@ -14,23 +14,15 @@
  * limitations under the License.
  */
 
-import ai.timefold.solver.core.api.solver.SolverFactory
-import ai.timefold.solver.core.config.constructionheuristic.ConstructionHeuristicPhaseConfig
-import ai.timefold.solver.core.config.heuristic.selector.move.composite.UnionMoveSelectorConfig
-import ai.timefold.solver.core.config.heuristic.selector.move.generic.ChangeMoveSelectorConfig
-import ai.timefold.solver.core.config.heuristic.selector.move.generic.SwapMoveSelectorConfig
-import ai.timefold.solver.core.config.localsearch.LocalSearchPhaseConfig
-import ai.timefold.solver.core.config.solver.SolverConfig
+import module ai.timefold.solver.core // Groovy 6: one import for the whole (JPMS) module
 import timefold.DietConstraintProvider
 import timefold.DietSolution
 import timefold.Food
 
-import java.time.Duration
+import static ConstructionHeuristicType.FIRST_FIT
+import static LocalSearchType.VARIABLE_NEIGHBORHOOD_DESCENT
 
-import static ai.timefold.solver.core.config.constructionheuristic.ConstructionHeuristicType.FIRST_FIT
-import static ai.timefold.solver.core.config.localsearch.LocalSearchType.VARIABLE_NEIGHBORHOOD_DESCENT
-
-def unsolved = new DietSolution(foods: [
+val unsolved = new DietSolution(foods: [
     new Food(name:  'Bread', cost:  2.0, protein: 4.0, fat: 1.0, carbs: 15.0, calories:  90),
     new Food(name:   'Milk', cost:  3.5, protein: 8.0, fat: 5.0, carbs: 11.7, calories: 120),
     new Food(name: 'Cheese', cost:  8.0, protein: 7.0, fat: 9.0, carbs:  0.4, calories: 106),
@@ -39,29 +31,30 @@ def unsolved = new DietSolution(foods: [
     new Food(name: 'Yogurt', cost:  1.0, protein: 9.2, fat: 1.0, carbs: 17.0, calories: 180)
 ])
 
-def construction = new ConstructionHeuristicPhaseConfig(constructionHeuristicType: FIRST_FIT)
-def moveSelector = new UnionMoveSelectorConfig([
+val construction = new ConstructionHeuristicPhaseConfig(constructionHeuristicType: FIRST_FIT)
+val moveSelector = new UnionMoveSelectorConfig([
         new ChangeMoveSelectorConfig(),
         new SwapMoveSelectorConfig()
 ])
-def localSearch = new LocalSearchPhaseConfig(localSearchType: VARIABLE_NEIGHBORHOOD_DESCENT,
+val localSearch = new LocalSearchPhaseConfig(localSearchType: VARIABLE_NEIGHBORHOOD_DESCENT,
                                              moveSelectorConfig: moveSelector)
-def config = new SolverConfig()
+val config = new SolverConfig()
         .withSolutionClass(DietSolution)
         .withEntityClasses(Food)
         .withConstraintProviderClass(DietConstraintProvider)
         .withPhases(construction, localSearch)
-        .withTerminationSpentLimit(Duration.ofSeconds(10))
+        .withTerminationSpentLimit(Duration.ofSeconds(10)) // java.time auto-imported since Groovy 5
 
-def factory = SolverFactory.create(config)
-def solver = factory.buildSolver()
+val factory = SolverFactory.create(config)
+val solver = factory.buildSolver()
 println solver.solve(unsolved)
 
 /*
-08:04:32.865 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Solving started: time spent (31), best score (-6init/0hard/0soft), environment mode (REPRODUCIBLE), move thread count (NONE), random (JDK with seed 0).
-08:04:33.057 [main] INFO  a.t.s.c.i.c.DefaultConstructionHeuristicPhase - Construction Heuristic phase (0) ended: time spent (225), best score (-1hard/-521soft), score calculation speed (1304/sec), step total (6).
-08:04:42.832 [main] INFO  a.t.s.c.i.l.DefaultLocalSearchPhase - Local Search phase (1) ended: time spent (10000), best score (0hard/-308soft), score calculation speed (287094/sec), step total (13656).
-08:04:42.833 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Solving ended: time spent (10000), best score (0hard/-308soft), score calculation speed (280601/sec), phase total (2), environment mode (REPRODUCIBLE), move thread count (NONE).
+21:26:35.753 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Solving started: time spent (2), best score (0hard/0soft), environment mode (PHASE_ASSERT), move thread count (NONE), random (seed 0).
+21:26:35.755 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Problem scale: genuine entity count (6), genuine variable count (6), approximate value count (40), approximate problem scale (4,096,000,000).
+21:26:35.814 [main] INFO  a.t.s.c.i.c.DefaultConstructionHeuristicPhase - Construction Heuristic phase (0) ended: time spent (63), best score (-1hard/-521soft), move evaluation speed (4067/sec), step total (6).
+21:26:45.752 [main] INFO  a.t.s.c.i.l.DefaultLocalSearchPhase - Local Search phase (1) ended: time spent (10001), best score (0hard/-308soft), move evaluation speed (874001/sec), step total (42264).
+21:26:45.753 [main] INFO  a.t.s.core.impl.solver.DefaultSolver - Solving ended: time spent (10002), best score (0hard/-308soft), move evaluation speed (868345/sec), phase total (2), environment mode (PHASE_ASSERT), move thread count (NONE).
 🍞 Bread: 0
 🥛 Milk: 0
 🧀 Cheese: 0.5

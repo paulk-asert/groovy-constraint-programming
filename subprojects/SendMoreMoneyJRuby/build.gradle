@@ -14,43 +14,51 @@
  * limitations under the License.
  */
 
+// The original com.github.jruby-gradle plugin no longer loads on Gradle 8+.
+// Its successor is the "Simplified JRuby Gradle Plugin" suite by the same author:
+// https://jruby-gradle.ysb33r.org/
+import org.ysb33r.gradle.jruby.api.base.tasks.JRubyExec
+import org.ysb33r.gradle.jruby.api.base.tasks.JRubyPrepare
+
+// The gem resolver runs an embedded Ratpack proxy. Its logging already goes to
+// Gradle's logger (visible with --info/--debug), but Ratpack 1.6 checks for the
+// slf4j 1.x StaticLoggerBinder class and warns if it is absent. Putting a 1.x
+// binding on the plugin classpath just silences that (false) warning.
 buildscript {
-    repositories {
-        maven {
-            url 'https://plugins.gradle.org/m2/'
-        }
-        mavenCentral()
-    }
     dependencies {
-        classpath('com.github.jruby-gradle:jruby-gradle-plugin:2.0.2') {
-            exclude(group: 'com.burgstaller')
-        }
-        classpath 'org.ysb33r.gradle:grolifant:0.12.1'
-        classpath 'io.github.rburgst:okhttp-digest:1.21'
+        classpath 'org.slf4j:slf4j-simple:1.7.36'
     }
 }
-apply plugin: 'com.github.jruby-gradle.base'
 
-import com.github.jrubygradle.JRubyExec
+plugins {
+    id 'java-setup'
+    id 'org.ysb33r.jruby.base' version '2.4.1'
+}
 
 repositories {
-    maven {
-        url 'https://plugins.gradle.org/m2/'
-    }
-    ruby.gems()
+    ruby.gems() // proxies rubygems.org for the 'rubygems' group
+}
+
+jruby {
+    jrubyVersion = '10.1.1.0'
 }
 
 dependencies {
-    gems 'rubygems:colorize:0.7.7+' // support colorize PrintScript test script
+    gems 'rubygems:colorize:1.1.0'   // used by the PrintScript test script
     gems 'rubygems:csp-solver:0.1.0'
 }
 
 FileUtil.baseNames(file("$projectDir/src/main/ruby"), [], '.rb').each { name ->
     tasks.register("run$name", JRubyExec) {
-        group 'Application'
-        jruby.jrubyVersion '9.4.9.0'
-        description "Run ${name}.rb as a JRuby script"
-        script "${projectDir}/src/main/ruby/${name}.rb"
-        jrubyArgs "-d", "-v"
+        group = 'Application'
+        description = "Run ${name}.rb as a JRuby script"
+        dependsOn 'gemPrepare' // installs the 'gems' configuration into build/.gems
+        gemDirProvider = tasks.named('gemPrepare', JRubyPrepare)
+        script {
+            path = file("src/main/ruby/${name}.rb")
+        }
+        jvm {
+            jvmArgs '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED', '--add-opens', 'java.base/java.io=ALL-UNNAMED'
+        }
     }
 }

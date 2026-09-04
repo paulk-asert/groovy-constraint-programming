@@ -27,9 +27,9 @@ for (x in 1..30)
 
 // constraint-based
 new Model('Pythagorean-triple').with {
-  def x = intVar(1, 30)
-  def y = intVar(1, 30)
-  def z = intVar(1, 30)
+  val x = intVar(1, 30)
+  val y = intVar(1, 30)
+  val z = intVar(1, 30)
   y.gt(x).post()      // y > x to remove duplicates
   z.gt(y).post()      // z > y for efficiency
   x.mul(x).add(y.mul(y)).eq(z.mul(z)).post()

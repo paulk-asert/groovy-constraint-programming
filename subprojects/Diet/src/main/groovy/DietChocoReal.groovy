@@ -19,46 +19,46 @@
 import org.chocosolver.solver.Model
 import org.chocosolver.solver.variables.RealVar
 
-def model = new Model("Diet problem")
-def unbounded = 1000.0d
-def precision = 0.00001d
+val model = new Model("Diet problem")
+val unbounded = 1000.0d
+val precision = 0.00001d
 
 // scale quantities by 10, coefficients by 10, products by 100
-def bread = model.realVar("Bread", 0.0, unbounded, precision)
-def milk = model.realVar("Milk", 0.0, 1.0, precision)
-def cheese = model.realVar("Cheese", 0.0, unbounded, precision)
-def potato = model.realVar("Potato", 0.0, unbounded, precision)
-def fish = model.realVar("Fish", 0.5, unbounded, precision)
-def yogurt = model.realVar("Yogurt", 0.0, unbounded, precision)
+val bread = model.realVar("Bread", 0.0, unbounded, precision)
+val milk = model.realVar("Milk", 0.0, 1.0, precision)
+val cheese = model.realVar("Cheese", 0.0, unbounded, precision)
+val potato = model.realVar("Potato", 0.0, unbounded, precision)
+val fish = model.realVar("Fish", 0.5, unbounded, precision)
+val yogurt = model.realVar("Yogurt", 0.0, unbounded, precision)
 RealVar[] all = [bread, milk, cheese, potato, fish, yogurt]
 
-def scalarIbex = { coeffs, var ->
+val scalarIbex = { coeffs, var ->
     def (a, b, c, d, e, f) = coeffs
     model.realIbexGenericConstraint("$a*{0}+$b*{1}+$c*{2}+$d*{3}+$e*{4}+$f*{5}={6}",
             [*all, var] as RealVar[]).post()
 }
 
-def cost = model.realVar("Cost", 0.0, unbounded, precision)
+val cost = model.realVar("Cost", 0.0, unbounded, precision)
 scalarIbex([2.0, 3.5, 8.0, 1.5, 11.0, 1.0], cost)
 
-def protein = model.realVar("Protein", 0.0, 10.0, precision)
+val protein = model.realVar("Protein", 0.0, 10.0, precision)
 scalarIbex([4.0, 8.0, 7.0, 1.3, 8.0, 9.2], protein)
 
-def fat = model.realVar("Fat", 8.0, unbounded, precision)
+val fat = model.realVar("Fat", 8.0, unbounded, precision)
 scalarIbex([1.0, 5.0, 9.0, 0.1, 7.0, 1.0], fat)
 
-def carbs = model.realVar("Carbohydrates", 10.0, unbounded, precision)
+val carbs = model.realVar("Carbohydrates", 10.0, unbounded, precision)
 scalarIbex([15.0, 11.7, 0.4, 22.6, 0.0, 17.0], carbs)
 
-def calories = model.realVar("Calories", 300, unbounded, precision)
+val calories = model.realVar("Calories", 300, unbounded, precision)
 scalarIbex([90, 120, 106, 97, 130, 180], calories)
 
 model.setObjective(Model.MINIMIZE, cost)
 
-def found = model.solver.findSolution()
+val found = model.solver.findSolution()
 
-def pretty = { var ->
-    def bounds = found.getRealBounds(var)
+val pretty = { var ->
+    val bounds = found.getRealBounds(var)
 //    printf "%s: %.6f .. %.6f%n", var.name, *bounds
     printf ("%s: %.6f .. %.6f%n", var.name, *bounds)
 }

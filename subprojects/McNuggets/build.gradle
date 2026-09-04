@@ -13,22 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply plugin: 'groovy'
 
-ext.ojalgo = JavaVersion.current().isJava8() ? ojalgoLegacyVersion : ojalgoVersion
-
-dependencies {
-    implementation "org.apache.groovy:groovy:$groovy4Version"
-    implementation "org.choco-solver:choco-solver:$chocoVersion"
-    implementation "org.ojalgo:ojalgo:$ojalgo"
+plugins {
+    id 'groovy-setup'
 }
 
-FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
-    tasks.register("run$name", JavaExec) {
-        dependsOn compileGroovy
-        group 'Application'
-        description "Run ${name}.groovy as a JVM application/Groovy script"
-        classpath = sourceSets.main.runtimeClasspath
-        mainClass = name
-    }
+dependencies {
+    implementation "org.choco-solver:choco-solver:$chocoVersion"
+    implementation java.toolchain.languageVersion.map { "org.ojalgo:ojalgo:${it.asInt() < 11 ? ojalgoLegacyVersion : ojalgoVersion}" }
 }

@@ -19,20 +19,20 @@ double MUTATION_RATE = 0.03
 double ELITISM_RATE = 0.1
 int TOURNAMENT_ARITY = 2
 
-var ga = new GeneticAlgorithm(
+val ga = new GeneticAlgorithm(
         new OnePointCrossover<Character>(), CROSSOVER_RATE,
         new RandomCharacterMutation(), MUTATION_RATE,
         new TournamentSelection(TOURNAMENT_ARITY))
 
-var randomSentence = (0..<Scenario.DIMENSION).collect{ Scenario.randomChar }
-var popList = (0..<POPULATION_SIZE).collect{ new StringChromosome(randomSentence) }
-var initial = new ElitisticListPopulation(popList, 2 * popList.size(), ELITISM_RATE)
+val randomSentence = (0..<Scenario.DIMENSION).collect{ Scenario.randomChar }
+val popList = (0..<POPULATION_SIZE).collect{ new StringChromosome(randomSentence) }
+val initial = new ElitisticListPopulation(popList, 2 * popList.size(), ELITISM_RATE)
 
-var stoppingCondition = new StoppingCondition() {
+val stoppingCondition = new StoppingCondition() {
     int generation = 0
 
     boolean isSatisfied(Population population) {
-        var fittestChromosome = population.fittestChromosome
+        val fittestChromosome = population.fittestChromosome
         if (generation == 1 || generation % 10 == 0)
             println "Generation $generation: $fittestChromosome"
         generation++
@@ -41,15 +41,15 @@ var stoppingCondition = new StoppingCondition() {
 }
 
 println "Starting evolution ..."
-var finalPopulation = ga.evolve(initial, stoppingCondition)
+val finalPopulation = ga.evolve(initial, stoppingCondition)
 println "Generation $ga.generationsEvolved: $finalPopulation.fittestChromosome"
 
 @InheritConstructors @AutoImplement
 class StringChromosome extends AbstractListChromosome<Character> {
     double fitness() {
         (0..<Scenario.DIMENSION).inject(0) { sum, i ->
-            var target = Scenario.SENTENCE.charAt(i)
-            var allele = representation.get(i).charValue()
+            val target = Scenario.SENTENCE.charAt(i)
+            val allele = representation.get(i).charValue()
             // fitter if closer ascii "distance"
             sum - (target - allele).abs()
         }
@@ -63,7 +63,7 @@ class StringChromosome extends AbstractListChromosome<Character> {
 class RandomCharacterMutation implements MutationPolicy {
     Chromosome mutate(Chromosome original) {
         int mutationIndex = r.nextInt(Scenario.DIMENSION)
-        var mutation = original.representation.toList()
+        val mutation = original.representation.toList()
         mutation.set(mutationIndex, Scenario.randomChar)
         original.newFixedLengthChromosome(mutation)
     }

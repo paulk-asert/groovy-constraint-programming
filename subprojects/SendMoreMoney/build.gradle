@@ -13,13 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply plugin: 'groovy'
-apply plugin: 'application'
 
-mainClassName = 'SendMoreMoneyChocoJava'
+plugins {
+    id 'groovy-setup'
+    id 'application'
+}
+
+application {
+    mainClass = 'SendMoreMoneyChocoJava'
+}
+
+groovySetup {
+    if (java.toolchain.languageVersion.get().asInt() >= 15) {
+        exclude 'SendMoreMoneyBruteForceJavaScript' // Nashorn removed in JDK15
+    }
+}
 
 dependencies {
-    implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
     implementation "com.google.ortools:ortools-java:$ortoolsVersion"
     implementation("org.jacop:jacop:$jacopVersion") {
@@ -30,24 +40,4 @@ dependencies {
     }
     runtimeOnly files('lib/choco-solver-2.1.5.jar')
     runtimeOnly 'org.slf4j:slf4j-simple:2.0.16'
-}
-
-def runall = tasks.register('runAll') {
-    group 'Application'
-    dependsOn run
-}
-
-FileUtil.baseNames(sourceSets.main.allSource.files).each { name ->
-    if (name.contains('JavaScript') && JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_15))
-        return // Nashorn removed in JDK15
-    def subtask = tasks.register("run$name", JavaExec) {
-        dependsOn compileGroovy
-        group 'Application'
-        description "Run ${name}.groovy as a JVM application/Groovy script"
-        classpath = sourceSets.main.runtimeClasspath
-        mainClass = name
-    }
-    runall.configure {
-        dependsOn subtask
-    }
 }

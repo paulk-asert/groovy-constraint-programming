@@ -31,14 +31,14 @@ class DietSolver {
 
     String solve() {
         keys = input.keySet().toList()[0..<input.size() - 2]
-        def cost = new LinearObjectiveFunction(keys.collect { input[it][0] } as double[], 0)
+        val cost = new LinearObjectiveFunction(keys.collect { input[it][0] } as double[], 0)
         keys.each { k ->
             if (input[k][-1] != NaN) constraints << scalar(keys.collect { it == k ? 1 : 0 }, LEQ, input[k][-1])
             if (input[k][-2] != NaN) constraints << scalar(keys.collect { it == k ? 1 : 0 }, GEQ, input[k][-2])
         }
-        def vars = 1..<input.entrySet().iterator()[0].value.size() - 2
+        val vars = 1..<input.entrySet().iterator()[0].value.size() - 2
         vars.each { v ->
-            def geq = input.max[v] == NaN
+            val geq = input.max[v] == NaN
             constraints << scalar(keys.collect { input[it][v] }, geq ? GEQ : LEQ, geq ? input.min[v] : input.max[v])
         }
         solution = new SimplexSolver().optimize(cost, constraints as LinearConstraintSet, GoalType.MINIMIZE)
@@ -46,7 +46,7 @@ class DietSolver {
     }
 
     String result(String food) {
-        def idx = keys.indexOf(food)
+        val idx = keys.indexOf(food)
         sprintf '%.2f', solution?.point[idx]
     }
 }

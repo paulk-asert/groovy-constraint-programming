@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply plugin: 'groovy'
-apply plugin: 'application'
 
-mainClassName = "Choco"
+plugins {
+    id 'groovy-setup'
+    id 'application'
+}
+
+application {
+    mainClass = 'Choco'
+}
 
 dependencies {
-    implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
 }

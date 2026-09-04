@@ -16,13 +16,13 @@
 // WARNING: Nashorn is removed from JDK15
 import javax.script.ScriptEngineManager
 
-def engine = new ScriptEngineManager().getEngineByName('nashorn')
-def script = '''
-var Range = Java.type("groovy.lang.IntRange");
-var Set = Java.type("java.util.HashSet");
-var m = 1;
-var o = 0;
-var others = new Range(2, 9);
+val engine = new ScriptEngineManager().getEngineByName('nashorn')
+val script = '''
+val Range = Java.type("groovy.lang.IntRange");
+val Set = Java.type("java.util.HashSet");
+val m = 1;
+val o = 0;
+val others = new Range(2, 9);
 for each (s in [8, 9]) {
   for each (e in others) {
     for each (n in others) {

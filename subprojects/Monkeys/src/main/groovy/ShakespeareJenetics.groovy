@@ -6,22 +6,22 @@ import io.jenetics.*
 import io.jenetics.engine.*
 import io.jenetics.util.CharSeq
 
-var SENTENCE = "To be or not to be?"
+val SENTENCE = "To be or not to be?"
 int DIMENSION = SENTENCE.size()
-var POSSIBLE_CHARS = new CharSeq(('a'..'z') + ('A'..'Z') + " !?.".toList() as char[])
+val POSSIBLE_CHARS = new CharSeq(('a'..'z') + ('A'..'Z') + " !?.".toList() as char[])
 int SIZE = POSSIBLE_CHARS.size()
 
-var fitness = { Genotype gt ->
+val fitness = { Genotype gt ->
     (0..<DIMENSION).inject(0) { sum, i ->
-        var target = SENTENCE.charAt(i)
-        var allele = gt.chromosome().get(i).allele()
+        val target = SENTENCE.charAt(i)
+        val allele = gt.chromosome().get(i).allele()
         int exactBonus = allele == target ? 100 : 0
         sum + SIZE - (target - allele).abs() + exactBonus
     }
 }
 
-var gtf = Genotype.of([CharacterChromosome.of(POSSIBLE_CHARS, DIMENSION)])
-var engine = Engine.builder(fitness, gtf).offspringSelector(new RouletteWheelSelector()).build()
-var log = { EvolutionResult er -> if (er.generation() % 500 == 1) println er.bestPhenotype().genotype() }
-var result = engine.stream().limit(10000).peek(log).collect(EvolutionResult.toBestGenotype())
+val gtf = Genotype.of([CharacterChromosome.of(POSSIBLE_CHARS, DIMENSION)])
+val engine = Engine.builder(fitness, gtf).offspringSelector(new RouletteWheelSelector()).build()
+val log = { EvolutionResult er -> if (er.generation() % 500 == 1) println er.bestPhenotype().genotype() }
+val result = engine.stream().limit(10000).peek(log).collect(EvolutionResult.toBestGenotype())
 println "Result: $result"

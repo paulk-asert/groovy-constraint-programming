@@ -1,0 +1,67 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Common setup for Groovy subprojects: java-setup plus the Groovy dependency
+// and a `runXxx` task for each top-level Groovy script (plus `runAll`).
+// Exclude scripts that need extra setup with:
+//
+//     groovySetup {
+//         exclude 'ScriptNeedingNativeLibs'
+//     }
+
+plugins {
+    id 'java-setup'
+    id 'groovy'
+}
+
+dependencies {
+    implementation "org.apache.groovy:groovy:$groovyVersion"
+}
+
+def setup = extensions.create('groovySetup', GroovySetupExtension)
+
+def runAll = tasks.register('runAll') {
+    group = 'Application'
+}
+
+// if the application plugin is also applied, its `run` task is part of runAll
+plugins.withId('application') {
+    runAll.configure {
+        dependsOn tasks.named('run')
+    }
+}
+
+// register run tasks for each script (a top-level .groovy file, i.e. not in a package dir)
+afterEvaluate {
+    def srcDirs = sourceSets.main.groovy.srcDirs
+    def scripts = sourceSets.main.allSource.files.findAll { f ->
+        f.name.endsWith('.groovy') && f.parentFile in srcDirs
+    }*.name.collect { it - '.groovy' }.findAll { name ->
+        !name.endsWith('Util') && !(name in setup.excludes)
+    }.sort()
+    scripts.each { name ->
+        def subtask = tasks.register("run$name", JavaExec) {
+            dependsOn compileGroovy
+            group = 'Application'
+            description = "Run ${name}.groovy as a JVM application/Groovy script"
+            classpath = sourceSets.main.runtimeClasspath
+            mainClass = name
+        }
+        runAll.configure {
+            dependsOn subtask
+        }
+    }
+}

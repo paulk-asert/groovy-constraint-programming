@@ -13,33 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply plugin: 'groovy'
 
-ext.ojalgo = JavaVersion.current().isJava8() ? ojalgoLegacyVersion : ojalgoVersion
+plugins {
+    id 'groovy-setup'
+}
+
+groovySetup {
+    exclude 'DietChocoReal' // needs Ibex native library
+}
 
 dependencies {
-    implementation "org.apache.groovy:groovy:$groovy4Version"
     implementation "org.choco-solver:choco-solver:$chocoVersion"
-    implementation "org.ojalgo:ojalgo:$ojalgo"
+    implementation java.toolchain.languageVersion.map { "org.ojalgo:ojalgo:${it.asInt() < 11 ? ojalgoLegacyVersion : ojalgoVersion}" }
     implementation "org.jacop:jacop:$jacopVersion"
     implementation 'org.apache.commons:commons-math4-legacy:4.0-beta1'
-    implementation 'org.hipparchus:hipparchus-optim:3.1'
+    implementation 'org.hipparchus:hipparchus-optim:4.0.3'
     implementation "com.google.ortools:ortools-java:$ortoolsVersion"
-}
-
-def runall = tasks.register('runAll') {
-    group 'Application'
-}
-
-FileUtil.baseNames(sourceSets.main.allSource.files, ['DietChocoReal']).each { name ->
-    def subtask = tasks.register("run$name", JavaExec) {
-        dependsOn compileGroovy
-        group 'Application'
-        description "Run ${name}.groovy as a JVM application/Groovy script"
-        classpath = sourceSets.main.runtimeClasspath
-        mainClass = name
-    }
-    runall.configure {
-        dependsOn subtask
-    }
 }

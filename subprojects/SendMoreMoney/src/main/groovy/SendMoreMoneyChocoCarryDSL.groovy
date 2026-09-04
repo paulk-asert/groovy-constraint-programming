@@ -26,7 +26,7 @@ import static java.lang.System.currentTimeMillis
 model("SEND+MORE=MONEY") {
     def (S, M) = ['S', 'M'].collect { intVar(it, 1..9) }
     def (E, N, D, O, R, Y) = ['E', 'N', 'D', 'O', 'R', 'Y'].collect { intVar(it, 0..9) }
-    def C = intVarArray(4, 0..1)
+    val C = intVarArray(4, 0..1)
 
     [allDifferent(S, E, N, D, M, O, R, Y),      //  C3 C2 C1 C0
      C[3]         .eq(M),                       //      S  E  N  D
@@ -35,13 +35,13 @@ model("SEND+MORE=MONEY") {
     (C[0] + N + R).eq(E + C[1] * 10),           //   M  O  N  E  Y
            (D + E).eq(Y + C[0] * 10)]*.post()
 
-    def start = currentTimeMillis()
+    val start = currentTimeMillis()
     println solver.findSolution()
     println "Solved in ${currentTimeMillis() - start} millis"
 }
 
 def model(String s, @DelegatesTo(Model) Closure c) {
-    def model = new Model("SEND+MORE=MONEY")
+    val model = new Model("SEND+MORE=MONEY")
     c.delegate = model
     use(ChocoCategory, c)
 }
@@ -67,7 +67,7 @@ class ReExpressionHolder {
 @CompileStatic
 class ChocoCategory {
     static IntVarHolder[] intVarArray(Model self, int size, IntRange range) {
-        def result = new IntVarHolder[size]
+        val result = new IntVarHolder[size]
         for (n in 0..<size) {
             result[n] = intVar(self, 0..1)
         }

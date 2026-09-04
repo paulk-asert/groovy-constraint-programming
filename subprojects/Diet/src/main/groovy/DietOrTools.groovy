@@ -31,32 +31,32 @@ static addConstraint(MPSolver solver, List<MPVariable> vars, MPVariable comp, Li
 }
 
 MPSolver.createSolver("SCIP").with {solver ->
-    def bread  = makeNumVar(0, infinity(),'bread')
-    def milk   = makeNumVar(0, 1, 'milk')
-    def cheese = makeNumVar(0, infinity(), 'cheese')
-    def potato = makeNumVar(0, infinity(), 'potato')
-    def fish   = makeNumVar(0.5, infinity(), 'fish')
-    def yogurt = makeNumVar(0, infinity(), 'yogurt')
+    val bread  = makeNumVar(0, infinity(),'bread')
+    val milk   = makeNumVar(0, 1, 'milk')
+    val cheese = makeNumVar(0, infinity(), 'cheese')
+    val potato = makeNumVar(0, infinity(), 'potato')
+    val fish   = makeNumVar(0.5, infinity(), 'fish')
+    val yogurt = makeNumVar(0, infinity(), 'yogurt')
 
-    def food = [bread, milk, cheese, potato, fish, yogurt]
+    val food = [bread, milk, cheese, potato, fish, yogurt]
 
-    def cost = makeNumVar(0, infinity(),'Cost')
+    val cost = makeNumVar(0, infinity(),'Cost')
     addConstraint(solver, food, cost, [2.0, 3.5, 8.0, 1.5, 11.0, 1.0])
-    def protein = makeNumVar(0, 10,'Protein')
+    val protein = makeNumVar(0, 10,'Protein')
     addConstraint(solver, food, protein, [4.0, 8.0, 7.0, 1.3, 8.0, 9.2])
-    def fat = makeNumVar(8, infinity(),'Fat')
+    val fat = makeNumVar(8, infinity(),'Fat')
     addConstraint(solver, food, fat, [1.0, 5.0, 9.0, 0.1, 7.0, 1.0])
-    def carbs = makeNumVar(10, infinity(),'Carbs')
+    val carbs = makeNumVar(10, infinity(),'Carbs')
     addConstraint(solver, food, carbs, [15.0, 11.7, 0.4, 22.6, 0.0, 17.0])
-    def cals = makeNumVar(300, infinity(),'Calories')
+    val cals = makeNumVar(300, infinity(),'Calories')
     addConstraint(solver, food, cals, [90, 120, 106, 97, 130, 180])
 
-    def components = [protein, fat, carbs, cals]
+    val components = [protein, fat, carbs, cals]
 
     objective().with {objective ->
         objective.setCoefficient(cost, 1)
         objective.setMinimization()
-        def result = solve()
+        val result = solve()
         println result
         if (result == OPTIMAL) {
             println "Solution: " + objective.value()

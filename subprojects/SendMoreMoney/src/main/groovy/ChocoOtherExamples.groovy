@@ -19,7 +19,7 @@ import org.chocosolver.solver.variables.IntVar
 new Model("ABCD*4=DCBA").with {
     def (A, D) = ['A', 'D'].collect { intVar(it, 1, 9) }
     def (B, C) = ['B', 'C'].collect { intVar(it, 0, 9) }
-    def R = (0..2).collect { intVar(0, 9) }
+    val R = (0..2).collect { intVar(0, 9) }
 
     allDifferent(A, B, C, D).post()
     R[2].add(A.mul(4)).eq(D).post()
@@ -76,7 +76,7 @@ new Model("HALF+FIFTH+TENTH+TENTH+TENTH=WHOLE").with {
             -10000, -1000, -100, -10, -1]
     scalar(ALL, COEFFS, "=", 0).post()
     solver.findAllSolutions().each {
-        def parts = [H, A, L, F, '+', F, I, F, T, H, '+', T, E, N, T, H, '+',
+        val parts = [H, A, L, F, '+', F, I, F, T, H, '+', T, E, N, T, H, '+',
                      T, E, N, T, H, '+', T, E, N, T, H, '=', W, H, O, L, E]
         println "$name: ${pretty(it, parts)}\n$it\n"
     }

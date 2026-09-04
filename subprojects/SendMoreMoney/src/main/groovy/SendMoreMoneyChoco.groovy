@@ -38,7 +38,7 @@ new Model("SEND+MORE=MONEY").with {
 
     scalar(ALL, COEFFS, "=", 0).post()
 
-    def start = currentTimeMillis()
+    val start = currentTimeMillis()
     println solver.findSolution()
     println "Solved in ${currentTimeMillis() - start} millis"
 }

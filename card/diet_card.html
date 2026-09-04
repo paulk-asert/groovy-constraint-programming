@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1176px; height:672px; background:#10141d;
+    font-family:-apple-system,'Segoe UI',Roboto,sans-serif; color:#e8edf4;
+    padding:40px 52px 32px; display:flex; flex-direction:column; overflow:hidden; }
+  .top { display:flex; justify-content:space-between; align-items:baseline; }
+  .kicker { color:#6cb6ff; font-size:15px; font-weight:700; letter-spacing:3.5px; }
+  .toplabel { color:#8b949e; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:14px; }
+  h1 { font-size:41px; font-weight:800; line-height:1.15; margin-top:12px; letter-spacing:-0.6px; }
+  h1 .accent { color:#6cb6ff; }
+  .byline { font-size:17px; color:#8b949e; margin-top:7px; }
+  .byline b { color:#b7c1cc; font-weight:600; }
+  .panels { display:flex; gap:22px; margin-top:18px; flex:1; min-height:0; }
+  .panel { background:#161b26; border:1px solid #2a3140; border-radius:12px;
+    padding:15px 19px 13px; border-left:3px solid #4caf7d; display:flex; flex-direction:column; flex:1; }
+  .panel.p2 { border-left-color:#f0b35e; }
+  .pill { display:inline-block; font-size:12px; font-weight:700; letter-spacing:2.3px;
+    padding:4px 12px; border-radius:999px; margin-bottom:9px; align-self:flex-start; }
+  .pill.a { color:#7ee787; border:1px solid #3f8b56; }
+  .pill.b { color:#f0b35e; border:1px solid #9c7a3c; }
+  pre { font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:13.5px; line-height:1.66;
+    color:#e8edf4; margin-top:2px; }
+  .kw { color:#79c0ff; } .ann { color:#f0b35e; } .str { color:#a5d6a1; } .mut { color:#768390; } .num { color:#f0b35e; }
+  .result { margin-top:auto; padding-top:10px; display:flex; align-items:baseline; gap:12px; }
+  .result .cost { font-size:22px; font-weight:800; color:#e8edf4; letter-spacing:-0.4px; }
+  .result .lbl { font-size:13.5px; color:#8b949e; }
+  .bars { margin-top:6px; display:grid; grid-template-columns:auto 1fr auto; column-gap:9px; row-gap:3px; align-items:center;
+    font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:12.5px; color:#b7c1cc; }
+  .bar { height:9px; border-radius:3px; background:#4caf7d; }
+  .bar.amber { background:#f0b35e; }
+  .amt { color:#8b949e; }
+  .strip { display:flex; gap:10px; margin-top:14px; }
+  .chip { flex:1; background:#161b26; border:1px solid #2a3140; border-radius:10px;
+    padding:8px 14px; font-size:13.5px; color:#b7c1cc; text-align:center; }
+  .chip b { color:#e8edf4; }
+  .footer { display:flex; justify-content:space-between; align-items:baseline;
+    margin-top:auto; padding-top:18px; }
+  .takeaway { font-size:16.5px; color:#b7c1cc; }
+  .takeaway b { color:#e8edf4; }
+  .site { color:#8b949e; font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:14px; }
+</style></head><body>
+  <div class="top">
+    <div class="kicker">APACHE GROOVY &#183; OPTIMIZATION</div>
+    <div class="toplabel">linear programming &#183; constraint solving</div>
+  </div>
+  <h1>Six foods, six rules: <span class="accent">the cheapest diet that still passes</span></h1>
+  <div class="byline"><b>Simplex</b> when the problem is linear &#183; <b>Timefold</b> when the search space bites &#183; a Groovy script either way</div>
+
+  <div class="panels">
+    <div class="panel">
+      <span class="pill a">SIMPLEX &#183; COMMONS MATH / HIPPARCHUS</span>
+<pre><span class="kw">var</span> fat      = scalar([<span class="num">1.0</span>, <span class="num">5.0</span>, <span class="num">9.0</span>, <span class="num">0.1</span>, <span class="num">7.0</span>, <span class="num">1.0</span>], GEQ, <span class="num">8</span>)
+<span class="kw">var</span> calories = scalar([<span class="num">90</span>, <span class="num">120</span>, <span class="num">106</span>, <span class="num">97</span>, <span class="num">130</span>, <span class="num">180</span>], GEQ, <span class="num">300</span>)
+<span class="kw">var</span> cost = <span class="kw">new</span> LinearObjectiveFunction(prices, <span class="num">0</span>)
+<span class="kw">var</span> zeroOrMore = <span class="kw">new</span> NonNegativeConstraint(<span class="kw">true</span>)
+<span class="kw">var</span> solution = <span class="kw">new</span> SimplexSolver()
+        .optimize(cost, constraints, zeroOrMore)</pre>
+      <div class="result"><span class="cost">$12.08</span><span class="lbl">optimal, in milliseconds</span></div>
+      <div class="bars">
+        <span>🥔 Potato</span><div class="bar" style="width:100%"></div><span class="amt">1.87</span>
+        <span>🐟 Fish</span><div class="bar" style="width:27%"></div><span class="amt">0.50</span>
+        <span>🧀 Cheese</span><div class="bar" style="width:24%"></div><span class="amt">0.45</span>
+        <span>🥛 Milk</span><div class="bar" style="width:3%"></div><span class="amt">0.05</span>
+      </div>
+    </div>
+    <div class="panel p2">
+      <span class="pill b">METAHEURISTICS &#183; TIMEFOLD 2</span>
+<pre><span class="ann">@PlanningEntity</span> <span class="kw">class</span> Food {
+    <span class="ann">@PlanningVariable</span> Integer amount   <span class="mut">// &#215; 100</span>
+    <span class="kw">double</span> cost, protein, fat, carbs, calories
+}
+factory.forEach(Food)
+       .groupBy(sum(amount))
+       .filter(fs -&gt; fs &lt; minAmount * <span class="num">100</span>)
+       .penalize(ONE_HARD)
+       .asConstraint(<span class="str">"Min $fieldName"</span>)</pre>
+      <div class="result"><span class="cost">$12.35</span><span class="lbl">0hard / -308soft after a 10s local search</span></div>
+      <div class="bars">
+        <span>🥔 Potato</span><div class="bar amber" style="width:100%"></div><span class="amt">1.90</span>
+        <span>🐟 Fish</span><div class="bar amber" style="width:26%"></div><span class="amt">0.50</span>
+        <span>🧀 Cheese</span><div class="bar amber" style="width:26%"></div><span class="amt">0.50</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="chip"><b>OR-Tools</b> SCIP</div>
+    <div class="chip"><b>ojAlgo</b> LP</div>
+    <div class="chip"><b>Choco</b> CP</div>
+    <div class="chip"><b>JaCoP</b> CP</div>
+    <div class="chip"><b>OptaPlanner</b> 10</div>
+    <div class="chip"><b>OpenSolver</b> Sheets</div>
+  </div>
+
+  <div class="footer">
+    <div class="takeaway"><b>One case study, ten solvers.</b> Paired libraries differ by a Maven coordinate and a few imports.</div>
+    <div class="site">groovy.apache.org/blog</div>
+  </div>
+</body></html>

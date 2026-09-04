@@ -20,16 +20,19 @@ plugins {
     // 'void org.gradle.api.plugins.JavaBasePlugin.configureForSourceSet(org.gradle.api.tasks.SourceSet, org.gradle.api.tasks.compile.AbstractCompile)'
     // comment out for now and do more work below instead
     // id 'org.frege-lang' version '0.8'
+    id 'java-setup'
     id 'application'
 }
 
-mainClassName = "SendMoreMoneyBruteForce"
+application {
+    mainClass = 'SendMoreMoneyBruteForce'
+}
 
 FileUtil.baseNames(sourceSets.main.allSource.files, [], ['.fr']).each { name ->
     tasks.register("run$name", JavaExec) {
         dependsOn 'fregeCompile'
-        group 'Application'
-        description "Run ${name}.fr as a Frege script"
+        group = 'Application'
+        description = "Run ${name}.fr as a Frege script"
         classpath = sourceSets.main.runtimeClasspath
         mainClass = name
     }
@@ -47,8 +50,10 @@ ext {
     fregeMainJavaDir   = "${buildDir}/src/main/frege"  // where frege-created *.java files go
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = javaTarget
+java {
+    sourceCompatibility = 1.8
+    targetCompatibility = javaTarget
+}
 
 repositories {
     flatDir {
@@ -64,7 +69,7 @@ dependencies {
 }
 
 tasks.register('prepareCompileDirs') { // prepare all the directories that the frege tasks rely upon
-    group "frege"
+    group = "frege"
     outputs.dir(sourceSets.main.java.classesDirectory).withPropertyName("compileOutputDir")
     doLast {
         ant.mkdir(dir: sourceSets.main.java.classesDirectory)
@@ -116,10 +121,10 @@ fregeCompile.doLast {
 tasks.register('fregeRun', JavaExec) {
     dependsOn     fregeCompile
     group         = "script"
-    description   = "Run -Pclass_name=${project.mainClassName}"
+    description   = "Run -Pclass_name=${application.mainClass.get()}"
     standardInput = System.in       // this might run interactively, so we need stdin
     classpath     = files sourceSets.main.runtimeClasspath.asPath
-    mainClassName = project.hasProperty("class_name") ? project.class_name : project.mainClassName
+    mainClass     = project.hasProperty("class_name") ? project.class_name : application.mainClass.get()
 }
 
 compileJava.dependsOn fregeCompile

@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
-    id 'java'
+    id 'java-setup'
 //    id "com.github.rzabini.gradle-jython" version "1.1.0"
 //    id 'com.github.hierynomus.jython' version '0.6.0'
 }
@@ -34,8 +35,8 @@ dependencies {
 
 FileUtil.baseNames(file("$projectDir/src/main/jython"), ['SendMoreMoneyConstraint'], '.py').each { name ->
     tasks.register("run$name", JavaExec) {
-        group 'Application'
-        description "Run ${name}.py as a Jython script"
+        group = 'Application'
+        description = "Run ${name}.py as a Jython script"
         classpath = sourceSets.main.runtimeClasspath
         mainClass = 'org.python.util.jython'
         args "$projectDir/src/main/jython/${name}.py"

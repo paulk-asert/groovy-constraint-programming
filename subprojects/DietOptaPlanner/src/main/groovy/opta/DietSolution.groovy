@@ -37,13 +37,13 @@ class DietSolution {
     HardSoftScore score
 
     String toString() {
-        var sb = new StringBuilder()
-        var emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
+        val sb = new StringBuilder()
+        val emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
         foods.eachWithIndex { f, idx ->
             sb << "${emoji[idx]} $f.name: ${f.amount / 100}\n"
         }
         for (name in ['fat', 'carbs', 'protein', 'calories', 'cost']) {
-            var total = foods.sum{ f -> f."$name" * f.amount / 100 }
+            val total = foods.sum{ f -> f."$name" * f.amount / 100 }
             sb << sprintf("Total %s: %.2f%n", name, total)
         }
         sb << "Score: $score"

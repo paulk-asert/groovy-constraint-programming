@@ -13,20 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply plugin: 'groovy'
-apply plugin: 'application'
 
-dependencies {
-    implementation "org.apache.groovy:groovy:$groovy4Version"
-    implementation 'ai.timefold.solver:timefold-solver-core:1.16.0'
-    implementation 'ch.qos.logback:logback-classic:1.5.12' // optional for debugging
+plugins {
+    id 'groovy-setup'
+    id 'application'
 }
 
-mainClassName = "DietTimefold"
+dependencies {
+    implementation 'ai.timefold.solver:timefold-solver-core:2.6.0'
+    implementation 'ch.qos.logback:logback-classic:1.6.3' // optional for debugging
+}
+
+application {
+    mainClass = 'DietTimefold'
+}
 
 tasks.register('printRuntimeClasspath') {
     doLast {
-        def jars = sourceSets.main.runtimeClasspath.findAll{it.name.endsWith('.jar') }
+        def jars = sourceSets.main.runtimeClasspath.findAll{ it.name.endsWith('.jar') }
         println "${jars.size()} jars in classpath:"
         println jars*.name.join('\n')
     }

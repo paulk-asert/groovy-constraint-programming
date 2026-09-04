@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id 'com.github.ben-manes.versions' version '0.51.0'
+    id 'io.github.ben-manes.versions' version '0.61.0'
 }
 
 ext.UNSTABLE = /^([0-9,.-]+[.-](alpha|beta|rc)[.\d-]*)|20030203.000550$/
@@ -25,11 +25,5 @@ tasks.named("dependencyUpdates").configure {
     outputFormatter = 'plain'
     rejectVersionIf {
         !(it.currentVersion.toLowerCase() ==~ UNSTABLE) && it.candidate.version.toLowerCase() ==~ UNSTABLE
-    }
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
     }
 }

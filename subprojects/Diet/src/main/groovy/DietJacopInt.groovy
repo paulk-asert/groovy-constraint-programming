@@ -20,37 +20,37 @@ import org.jacop.core.*
 import org.jacop.search.*
 import static org.jacop.core.IntDomain.MaxInt
 
-def store = new Store()
+val store = new Store()
 
 // scale quantities by 10, coefficients by 10, products by 100
-def bread  = new IntVar(store, 'bread',  0, MaxInt)
-def milk   = new IntVar(store, 'milk',   0, 10)
-def cheese = new IntVar(store, 'cheese', 0, MaxInt)
-def potato = new IntVar(store, 'potato', 0, MaxInt)
-def fish   = new IntVar(store, 'fish',   5, MaxInt)
-def yogurt = new IntVar(store, 'yogurt', 0, MaxInt)
+val bread  = new IntVar(store, 'bread',  0, MaxInt)
+val milk   = new IntVar(store, 'milk',   0, 10)
+val cheese = new IntVar(store, 'cheese', 0, MaxInt)
+val potato = new IntVar(store, 'potato', 0, MaxInt)
+val fish   = new IntVar(store, 'fish',   5, MaxInt)
+val yogurt = new IntVar(store, 'yogurt', 0, MaxInt)
 
 IntVar[] all = [bread, milk, cheese, potato, fish, yogurt]
 
-def cost = new IntVar(store, 'Cost', 0, MaxInt)
+val cost = new IntVar(store, 'Cost', 0, MaxInt)
 store.impose(new LinearInt(all, [20, 35, 80, 15, 110, 10] as int[], '=', cost))
 
-def protein = new IntVar(store, 'Protein', 0, 1000)
+val protein = new IntVar(store, 'Protein', 0, 1000)
 store.impose(new LinearInt(all, [40, 80, 70, 13, 80, 92] as int[], '=', protein))
 
-def fat = new IntVar(store, 'Fat', 800, MaxInt)
+val fat = new IntVar(store, 'Fat', 800, MaxInt)
 store.impose(new LinearInt(all, [10, 50, 90, 1, 70, 10] as int[], '=', fat))
 
-def carbs = new IntVar(store, 'Carbohydrates', 1000, MaxInt)
+val carbs = new IntVar(store, 'Carbohydrates', 1000, MaxInt)
 store.impose(new LinearInt(all, [150, 117, 4, 226, 0, 170] as int[], '=', carbs))
 
-def calories = new IntVar(store, 'Calories', 30000, MaxInt)
+val calories = new IntVar(store, 'Calories', 30000, MaxInt)
 store.impose(new LinearInt(all, [900, 1200, 1060, 970, 1300, 1800] as int[], '=', calories))
 
-def search = new DepthFirstSearch<IntVar>()
-def select = new SimpleSelect<IntVar>(all, null, new IndomainMin<IntVar>())
+val search = new DepthFirstSearch<IntVar>()
+val select = new SimpleSelect<IntVar>(all, null, new IndomainMin<IntVar>())
 
-def result = search.labeling(store, select, cost)
+val result = search.labeling(store, select, cost)
 println result
 if (result) store.print()
 

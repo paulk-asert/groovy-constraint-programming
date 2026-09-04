@@ -18,10 +18,10 @@ package timefold
 import ai.timefold.solver.core.api.domain.solution.PlanningEntityCollectionProperty
 import ai.timefold.solver.core.api.domain.solution.PlanningScore
 import ai.timefold.solver.core.api.domain.solution.PlanningSolution
-import ai.timefold.solver.core.api.domain.valuerange.CountableValueRange
+import ai.timefold.solver.core.api.domain.valuerange.ValueRange
 import ai.timefold.solver.core.api.domain.valuerange.ValueRangeFactory
 import ai.timefold.solver.core.api.domain.valuerange.ValueRangeProvider
-import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore
+import ai.timefold.solver.core.api.score.HardSoftScore
 
 @PlanningSolution
 class DietSolution {
@@ -29,7 +29,7 @@ class DietSolution {
     List<Food> foods
 
     @ValueRangeProvider(id = "amount")
-    CountableValueRange<Integer> getAmount() {
+    ValueRange<Integer> getAmount() {
         ValueRangeFactory.createIntValueRange(0, 200, 5)
     }
 
@@ -37,13 +37,13 @@ class DietSolution {
     HardSoftScore score
 
     String toString() {
-        var sb = new StringBuilder()
-        var emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
-        foods.eachWithIndex { f, idx ->
+        val sb = new StringBuilder()
+        val emoji = ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶']
+        for (int idx, var f in foods) { // Groovy 5: index variable in for loops
             sb << "${emoji[idx]} $f.name: ${f.amount / 100}\n"
         }
         for (name in ['fat', 'carbs', 'protein', 'calories', 'cost']) {
-            var total = foods.sum{ f -> f."$name" * f.amount / 100 }
+            val total = foods.sum{ f -> f."$name" * f.amount / 100 }
             sb << sprintf("Total %s: %.2f%n", name, total)
         }
         sb << "Score: $score"

@@ -13,23 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.9.23"
+    id 'java-setup'
+    id "org.jetbrains.kotlin.jvm" version "2.4.10"
     id 'application'
 }
 
-mainClassName = "SendMoreMoneyChocoKtxKt"
+application {
+    mainClass = 'SendMoreMoneyChocoKtxKt'
+}
 
 dependencies {
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.23'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.4.10'
     implementation files('lib/choco-ktx-0.0.8.jar')
     // above file replaces below until it appears in a public repo - was in bintray
     //implementation 'ar.com.agomez:choco-ktx:0.0.8'
     implementation "org.choco-solver:choco-solver:$chocoVersion"
 }
 
-tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions.jvmTarget = "1.8"
+kotlin {
+    jvmToolchain(javaVersion as int) // keep Kotlin on the same JDK as java-setup
 }
