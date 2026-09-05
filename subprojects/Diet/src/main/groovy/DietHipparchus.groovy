@@ -18,8 +18,8 @@ import org.hipparchus.optim.linear.*
 
 import static org.hipparchus.optim.linear.Relationship.*
 
-static scalar(coeffs, rel, double val) {
-    new LinearConstraint(coeffs as double[], rel, val)
+static scalar(coeffs, rel, double value) {
+    new LinearConstraint(coeffs as double[], rel, value)
 }
 
 val bread_min  = scalar([1, 0, 0, 0, 0, 0], GEQ, 0)

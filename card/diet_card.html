@@ -50,11 +50,11 @@
   <div class="panels">
     <div class="panel">
       <span class="pill a">SIMPLEX &#183; COMMONS MATH / HIPPARCHUS</span>
-<pre><span class="kw">var</span> fat      = scalar([<span class="num">1.0</span>, <span class="num">5.0</span>, <span class="num">9.0</span>, <span class="num">0.1</span>, <span class="num">7.0</span>, <span class="num">1.0</span>], GEQ, <span class="num">8</span>)
-<span class="kw">var</span> calories = scalar([<span class="num">90</span>, <span class="num">120</span>, <span class="num">106</span>, <span class="num">97</span>, <span class="num">130</span>, <span class="num">180</span>], GEQ, <span class="num">300</span>)
-<span class="kw">var</span> cost = <span class="kw">new</span> LinearObjectiveFunction(prices, <span class="num">0</span>)
-<span class="kw">var</span> zeroOrMore = <span class="kw">new</span> NonNegativeConstraint(<span class="kw">true</span>)
-<span class="kw">var</span> solution = <span class="kw">new</span> SimplexSolver()
+<pre><span class="kw">val</span> fat      = scalar([<span class="num">1.0</span>, <span class="num">5.0</span>, <span class="num">9.0</span>, <span class="num">0.1</span>, <span class="num">7.0</span>, <span class="num">1.0</span>], GEQ, <span class="num">8</span>)
+<span class="kw">val</span> calories = scalar([<span class="num">90</span>, <span class="num">120</span>, <span class="num">106</span>, <span class="num">97</span>, <span class="num">130</span>, <span class="num">180</span>], GEQ, <span class="num">300</span>)
+<span class="kw">val</span> cost = <span class="kw">new</span> LinearObjectiveFunction(prices, <span class="num">0</span>)
+<span class="kw">val</span> zeroOrMore = <span class="kw">new</span> NonNegativeConstraint(<span class="kw">true</span>)
+<span class="kw">val</span> solution = <span class="kw">new</span> SimplexSolver()
         .optimize(cost, constraints, zeroOrMore)</pre>
       <div class="result"><span class="cost">$12.08</span><span class="lbl">optimal, in milliseconds</span></div>
       <div class="bars">

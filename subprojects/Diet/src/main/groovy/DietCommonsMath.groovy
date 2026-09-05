@@ -17,9 +17,10 @@
 import org.apache.commons.math4.legacy.optim.linear.*
 
 import static org.apache.commons.math4.legacy.optim.linear.Relationship.*
+import static org.codehaus.groovy.util.StringUtil.bar // Groovy 5: ascii bar chart helper
 
-static scalar(coeffs, rel, val) {
-    new LinearConstraint(coeffs as double[], rel, val)
+static scalar(coeffs, rel, double value) {
+    new LinearConstraint(coeffs as double[], rel, value)
 }
 
 val milk_max   = scalar([0, 1, 0, 0, 0, 0], LEQ, 1)
@@ -37,11 +38,12 @@ val zeroOrMore = new NonNegativeConstraint(true)
 
 val solution = new SimplexSolver().optimize(cost, constraints, zeroOrMore)
 
-static pretty(int idx, double d) {
-    d ? [sprintf('%s %.2f', ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶'][idx], d)] : []
+// BigDecimal rather than double: StringUtil.bar currently fails for Double/Float arguments
+static pretty(int idx, BigDecimal d) {
+    d ? [sprintf('%s %s %.2f', ['🍞', '🥛', '🧀', '🥔', '🐟', '🍶'][idx], bar(d, 0, 2, 20), d)] : []
 }
 
 if (solution != null) {
     printf "Cost: %.2f%n", solution.value
-    println solution.point.indexed().collectMany(this::pretty).join(', ')
+    println solution.point.indexed().collectMany(this::pretty).join('\n')
 }
